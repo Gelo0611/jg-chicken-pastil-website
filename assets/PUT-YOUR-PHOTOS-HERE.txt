@@ -1,0 +1,17 @@
+Add your own photos here with these filenames:
+
+hero-pastil.jpg
+about.jpg
+pastil-jar.jpg
+gallery-1.jpg
+gallery-2.jpg
+gallery-3.jpg
+gallery-4.jpg
+gallery-5.jpg
+
+Recommended:
+- JPG or WebP
+- At least 1200px wide for hero/gallery photos
+- Clear product photos with good lighting
+
+The CSS uses object-fit: cover so the images automatically fit their containers.
