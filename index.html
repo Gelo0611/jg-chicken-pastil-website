@@ -4,16 +4,64 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#970d17" />
-  <meta name="description" content="J&G Chicken Pastil - flavorful chicken pastil meals, refreshing drinks, and Chicken Pastil in a Jar in Valenzuela City." />
-  <title>J&G Chicken Pastil | Pastil Meals & Chicken Pastil in a Jar</title>
+  <meta name="description" content="J&G Chicken Pastil in Marulas, Valenzuela City. Explore our affordable Chicken Pastil meals, combos, Chicken Pastil in a Jar, gallery, location, and contact details." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="J&G Chicken Pastil | Made to Satisfy" />
+  <meta property="og:description" content="Affordable and flavorful Chicken Pastil meals, combos, and Chicken Pastil in a Jar in Marulas, Valenzuela City." />
+  <meta property="og:url" content="https://jg-chicken-pastil-website.vercel.app/" />
+  <meta property="og:image" content="https://jg-chicken-pastil-website.vercel.app/assets/hero-pastil.jpg" />
+  <meta property="og:image:alt" content="J&G Chicken Pastil signature meal" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="J&G Chicken Pastil | Made to Satisfy" />
+  <meta name="twitter:description" content="Explore J&G Chicken Pastil meals, Chicken Pastil in a Jar, gallery, location, and contact details." />
+  <meta name="twitter:image" content="https://jg-chicken-pastil-website.vercel.app/assets/hero-pastil.jpg" />
+
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+
+  <title>J&G Chicken Pastil | Marulas, Valenzuela City</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    "name": "J&G Chicken Pastil",
+    "description": "Chicken Pastil meals and Chicken Pastil in a Jar in Marulas, Valenzuela City.",
+    "image": "https://jg-chicken-pastil-website.vercel.app/assets/hero-pastil.jpg",
+    "url": "https://jg-chicken-pastil-website.vercel.app/",
+    "telephone": "+639630326793",
+    "priceRange": "₱",
+    "servesCuisine": "Filipino",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Pio Val, Marulas",
+      "addressLocality": "Valenzuela City",
+      "addressRegion": "Metro Manila",
+      "addressCountry": "PH"
+    },
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61576281657176"
+    ]
+  }
+  </script>
 </head>
+
 <body>
+  <a class="skip-link" href="#home">Skip to content</a>
+
   <div class="announcement">
-    <p>🔥 Freshly served Chicken Pastil • Visit us in Marulas, Valenzuela City</p>
+    <p>
+      🔥 Freshly served Chicken Pastil • Visit us in Marulas, Valenzuela City
+      <span class="announcement-dot">•</span>
+      <span id="announcementStatus">Message us for today's availability</span>
+    </p>
   </div>
 
   <header class="site-header" id="top">
@@ -39,7 +87,7 @@
         <a href="#jar" class="nav-link" data-section="jar">Pastil in a Jar</a>
         <a href="#gallery" class="nav-link" data-section="gallery">Gallery</a>
         <a href="#contact" class="nav-link" data-section="contact">Contact</a>
-        <a href="#menu" class="btn btn-sm btn-gold">View Menu</a>
+        <button class="btn btn-sm btn-gold order-trigger nav-order-button" id="navOrderButton" type="button">Order Now <span class="cart-count" id="navCartCount" aria-label="0 items in cart">0</span></button>
       </div>
     </nav>
   </header>
@@ -48,17 +96,21 @@
     <section class="hero" id="home">
       <div class="hero-glow hero-glow-one"></div>
       <div class="hero-glow hero-glow-two"></div>
+
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <div class="eyebrow">LOCAL FAVORITE • VALENZUELA CITY</div>
           <h1>Comfort food with a <span>bold Filipino flavor.</span></h1>
+
           <p class="hero-lead">
             J&G Chicken Pastil serves flavorful shredded chicken, warm rice, satisfying meal combos, and our Chicken Pastil in a Jar—perfect for quick meals at home or on the go.
           </p>
+
           <div class="hero-actions">
             <a href="#menu" class="btn btn-gold">Explore Our Menu</a>
-            <a href="#contact" class="btn btn-outline">Find Us</a>
+            <button class="btn btn-outline order-trigger" type="button">Order Now</button>
           </div>
+
           <div class="hero-points">
             <div><strong>Affordable</strong><span>Everyday meals</span></div>
             <div><strong>Convenient</strong><span>Quick & satisfying</span></div>
@@ -69,13 +121,19 @@
         <div class="hero-visual reveal">
           <div class="hero-card">
             <div class="image-shell hero-photo" data-placeholder="Add your best Chicken Pastil photo here">
-              <img src="assets/hero-pastil.jpg" alt="J&G Chicken Pastil signature meal" fetchpriority="high" />
+              <img
+                src="assets/hero-pastil.jpg"
+                alt="J&G Chicken Pastil signature meal"
+                fetchpriority="high"
+                decoding="async"
+              />
               <div class="image-placeholder">
                 <span class="placeholder-icon">📸</span>
                 <strong>Your Signature Pastil Photo</strong>
                 <small>assets/hero-pastil.jpg</small>
               </div>
             </div>
+
             <div class="floating-badge">
               <span>Starting at</span>
               <strong>₱35</strong>
@@ -86,7 +144,7 @@
       </div>
     </section>
 
-    <section class="trust-strip">
+    <section class="trust-strip" aria-label="J&G highlights">
       <div class="container trust-grid">
         <div><span>01</span><p><strong>Freshly Prepared</strong><br>Made for satisfying everyday meals.</p></div>
         <div><span>02</span><p><strong>Budget Friendly</strong><br>Good food without breaking the budget.</p></div>
@@ -98,7 +156,7 @@
       <div class="container split-section">
         <div class="about-photo-wrap reveal">
           <div class="image-shell about-photo">
-            <img src="assets/about.jpg" alt="J&G Chicken Pastil business" loading="lazy" />
+            <img src="assets/about.jpg" alt="J&G Chicken Pastil BikeCart" loading="lazy" decoding="async" />
             <div class="image-placeholder">
               <span class="placeholder-icon">🏪</span>
               <strong>Business / BikeCart Photo</strong>
@@ -111,12 +169,15 @@
         <div class="section-copy reveal">
           <div class="eyebrow dark">ABOUT J&G</div>
           <h2>Simple food, satisfying flavor, made for the community.</h2>
+
           <p>
             J&G Chicken Pastil is a local food business serving an easy, affordable, and flavorful take on the Filipino favorite Chicken Pastil. Our goal is simple: give customers a filling meal they can enjoy anytime—whether they are heading to school, work, or just craving comfort food.
           </p>
+
           <p>
             Aside from our rice meals, we also offer Chicken Pastil in a Jar for customers who want the same savory flavor ready at home.
           </p>
+
           <div class="feature-list">
             <div><span>✓</span> Signature Chicken Pastil</div>
             <div><span>✓</span> Meal combo options</div>
@@ -132,58 +193,142 @@
         <div class="section-heading reveal">
           <div class="eyebrow">OUR MENU</div>
           <h2>Pick your favorite J&G meal.</h2>
-          <p>Simple combos, sulit servings, and satisfying add-ons.</p>
+          <p>Tap a meal to view details or prepare an order message for Messenger.</p>
         </div>
 
         <div class="menu-grid">
           <article class="menu-card reveal">
-            <div class="menu-icon">🍗</div>
-            <h3>Chicken Pastil</h3>
-            <p>Our signature savory chicken pastil served with rice.</p>
-            <div class="price">₱35</div>
-            <button class="text-button open-menu-modal" data-name="Chicken Pastil + Rice" data-price="₱35" data-desc="Signature shredded chicken pastil served with warm rice. A simple, budget-friendly everyday meal.">View details →</button>
+            <div class="menu-photo">
+              <img
+                src="assets/menu-pastil.jpg"
+                data-fallback="assets/hero-pastil.jpg"
+                alt="J&G Chicken Pastil"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="menu-photo-fallback" aria-hidden="true">🍗</div>
+            </div>
+            <div class="menu-card-body">
+              <h3>Chicken Pastil</h3>
+              <p>Our signature savory chicken pastil served with rice.</p>
+              <div class="price">₱35</div>
+              <div class="menu-card-actions">
+                <button class="text-button open-menu-modal" type="button" data-product-id="chicken-pastil" data-name="Chicken Pastil" data-price="₱35" data-desc="Signature shredded chicken pastil served with warm rice. A simple, budget-friendly everyday meal.">Details →</button>
+                <button class="order-pill add-to-cart" type="button" data-product-id="chicken-pastil">Add to Cart</button>
+              </div>
+            </div>
           </article>
 
           <article class="menu-card reveal">
-            <div class="menu-icon">🥤</div>
-            <h3>Value Meal</h3>
-            <p>Chicken Pastil with refreshing Gulaman.</p>
-            <div class="price">₱45</div>
-            <button class="text-button open-menu-modal" data-name="Value Meal" data-price="₱45" data-desc="Chicken Pastil paired with a refreshing Gulaman drink.">View details →</button>
+            <div class="menu-photo">
+              <img
+                src="assets/menu-value.jpg"
+                data-fallback="assets/gallery-1.jpg"
+                alt="J&G Value Meal"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="menu-photo-fallback" aria-hidden="true">🥤</div>
+            </div>
+            <div class="menu-card-body">
+              <h3>Value Meal</h3>
+              <p>Chicken Pastil with refreshing Gulaman.</p>
+              <div class="price">₱45</div>
+              <div class="menu-card-actions">
+                <button class="text-button open-menu-modal" type="button" data-product-id="value-meal" data-name="Value Meal" data-price="₱45" data-desc="Chicken Pastil paired with a refreshing Gulaman drink.">Details →</button>
+                <button class="order-pill add-to-cart" type="button" data-product-id="value-meal">Add to Cart</button>
+              </div>
+            </div>
           </article>
 
           <article class="menu-card featured reveal">
             <div class="card-tag">Best Seller</div>
-            <div class="menu-icon">🥚</div>
-            <h3>Busog Meal</h3>
-            <p>Chicken Pastil with a boiled egg.</p>
-            <div class="price">₱50</div>
-            <button class="text-button open-menu-modal" data-name="Busog Meal" data-price="₱50" data-desc="Chicken Pastil served with a boiled egg for a more filling meal.">View details →</button>
+            <div class="menu-photo">
+              <img
+                src="assets/menu-busog.jpg"
+                data-fallback="assets/gallery-1.jpg"
+                alt="J&G Busog Meal"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="menu-photo-fallback" aria-hidden="true">🥚</div>
+            </div>
+            <div class="menu-card-body">
+              <h3>Busog Meal</h3>
+              <p>Chicken Pastil with a boiled egg.</p>
+              <div class="price">₱50</div>
+              <div class="menu-card-actions">
+                <button class="text-button open-menu-modal" type="button" data-product-id="busog-meal" data-name="Busog Meal" data-price="₱50" data-desc="Chicken Pastil served with a boiled egg for a more filling meal.">Details →</button>
+                <button class="order-pill add-to-cart" type="button" data-product-id="busog-meal">Add to Cart</button>
+              </div>
+            </div>
           </article>
 
           <article class="menu-card premium reveal">
             <div class="card-tag gold-tag">Premium</div>
-            <div class="menu-icon">⭐</div>
-            <h3>Premium Meal</h3>
-            <p>Chicken Pastil, boiled egg, and Gulaman.</p>
-            <div class="price">₱60</div>
-            <button class="text-button open-menu-modal" data-name="Premium Meal" data-price="₱60" data-desc="Our complete combo: Chicken Pastil, boiled egg, and Gulaman drink.">View details →</button>
+            <div class="menu-photo">
+              <img
+                src="assets/menu-premium.jpg"
+                data-fallback="assets/gallery-1.jpg"
+                alt="J&G Premium Meal"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="menu-photo-fallback" aria-hidden="true">⭐</div>
+            </div>
+            <div class="menu-card-body">
+              <h3>Premium Meal</h3>
+              <p>Chicken Pastil, boiled egg, and Gulaman.</p>
+              <div class="price">₱60</div>
+              <div class="menu-card-actions">
+                <button class="text-button open-menu-modal" type="button" data-product-id="premium-meal" data-name="Premium Meal" data-price="₱60" data-desc="Our complete combo: Chicken Pastil, boiled egg, and Gulaman drink.">Details →</button>
+                <button class="order-pill add-to-cart" type="button" data-product-id="premium-meal">Add to Cart</button>
+              </div>
+            </div>
           </article>
 
           <article class="menu-card reveal">
-            <div class="menu-icon">🍚</div>
-            <h3>Extra Busog</h3>
-            <p>Chicken Pastil with an extra serving of rice.</p>
-            <div class="price">₱50</div>
-            <button class="text-button open-menu-modal" data-name="Extra Busog" data-price="₱50" data-desc="Chicken Pastil with extra rice for bigger appetites.">View details →</button>
+            <div class="menu-photo">
+              <img
+                src="assets/menu-extra-busog.jpg"
+                data-fallback="assets/gallery-1.jpg"
+                alt="J&G Extra Busog Meal"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="menu-photo-fallback" aria-hidden="true">🍚</div>
+            </div>
+            <div class="menu-card-body">
+              <h3>Extra Busog</h3>
+              <p>Chicken Pastil with an extra serving of rice.</p>
+              <div class="price">₱50</div>
+              <div class="menu-card-actions">
+                <button class="text-button open-menu-modal" type="button" data-product-id="extra-busog" data-name="Extra Busog" data-price="₱50" data-desc="Chicken Pastil with extra rice for bigger appetites.">Details →</button>
+                <button class="order-pill add-to-cart" type="button" data-product-id="extra-busog">Add to Cart</button>
+              </div>
+            </div>
           </article>
 
           <article class="menu-card reveal">
-            <div class="menu-icon">🍢</div>
-            <h3>Tusok-Tusok</h3>
-            <p>7 pieces assorted kikiam, chicken balls, and hotdogs.</p>
-            <div class="price">₱20</div>
-            <button class="text-button open-menu-modal" data-name="Tusok-Tusok" data-price="₱20" data-desc="7 assorted pieces of kikiam, chicken balls, and hotdogs. Great as an add-on or quick snack.">View details →</button>
+            <div class="menu-photo">
+              <img
+                src="assets/menu-tusok.jpg"
+                data-fallback="assets/gallery-5.jpg"
+                alt="J&G Tusok-Tusok"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="menu-photo-fallback" aria-hidden="true">🍢</div>
+            </div>
+            <div class="menu-card-body">
+              <h3>Tusok-Tusok</h3>
+              <p>7 pieces assorted kikiam, chicken balls, and hotdogs.</p>
+              <div class="price">₱20</div>
+              <div class="menu-card-actions">
+                <button class="text-button open-menu-modal" type="button" data-product-id="tusok-tusok" data-name="Tusok-Tusok" data-price="₱20" data-desc="7 assorted pieces of kikiam, chicken balls, and hotdogs. Great as an add-on or quick snack.">Details →</button>
+                <button class="order-pill add-to-cart" type="button" data-product-id="tusok-tusok">Add to Cart</button>
+              </div>
+            </div>
           </article>
         </div>
 
@@ -202,18 +347,29 @@
           <div class="eyebrow">TAKE J&G HOME</div>
           <h2>Chicken Pastil in a Jar</h2>
           <p class="large-copy">The savory J&G flavor you love, packed in a jar for easy meals at home.</p>
-          <div class="jar-price"><span>Only</span><strong>₱195</strong><small>per jar</small></div>
+
+          <div class="jar-price">
+            <span>Only</span>
+            <strong>₱195</strong>
+            <small>per jar</small>
+          </div>
+
           <div class="jar-benefits">
             <div><span>✓</span><p><strong>Convenient</strong><br>Easy to pair with rice anytime.</p></div>
             <div><span>✓</span><p><strong>Flavorful</strong><br>Made for that satisfying pastil taste.</p></div>
             <div><span>✓</span><p><strong>Great for sharing</strong><br>Keep a jar ready at home.</p></div>
+            <div><span>✓</span><p><strong>Storage</strong><br>Keep refrigerated after opening.</p></div>
           </div>
-          <a href="#contact" class="btn btn-gold">Ask About Availability</a>
+
+          <div class="jar-actions">
+            <button class="btn btn-gold add-to-cart" type="button" data-product-id="pastil-jar">Add Jar to Cart</button>
+            <a id="jarMessengerLink" href="#" class="btn btn-cream-outline" target="_blank" rel="noopener">Ask Availability</a>
+          </div>
         </div>
 
         <div class="jar-visual reveal">
           <div class="image-shell jar-photo">
-            <img src="assets/pastil-jar.jpg" alt="J&G Chicken Pastil in a Jar" loading="lazy" />
+            <img src="assets/pastil-jar.jpg" alt="J&G Chicken Pastil in a Jar" loading="lazy" decoding="async" />
             <div class="image-placeholder">
               <span class="placeholder-icon">🫙</span>
               <strong>Pastil in a Jar Product Photo</strong>
@@ -225,33 +381,92 @@
       </div>
     </section>
 
+    <section class="section loyalty-section" id="loyalty">
+      <div class="container loyalty-grid">
+        <div class="loyalty-card-visual reveal" aria-label="J&G Chicken Pastil Loyalty Card preview">
+          <div class="loyalty-top">
+            <img src="assets/logo.png" alt="" aria-hidden="true" />
+            <div>
+              <span>J&G</span>
+              <strong>LOYALTY CARD</strong>
+            </div>
+          </div>
+          <div class="loyalty-card-copy">
+            <span>EAT • COLLECT • ENJOY</span>
+            <h3>Thank you for supporting local.</h3>
+            <p>Bring your loyalty card when purchasing eligible meals.</p>
+          </div>
+          <div class="loyalty-card-shine"></div>
+        </div>
+
+        <div class="section-copy reveal">
+          <div class="eyebrow dark">J&G LOYALTY</div>
+          <h2>Your cravings can come with rewards.</h2>
+          <p>
+            Ask for a J&G Loyalty Card at our BikeCart. Collect stamps on eligible purchases and keep your card with you so you can claim the reward indicated on your card once completed.
+          </p>
+
+          <div class="loyalty-steps">
+            <div><span>1</span><p><strong>Get your card</strong><br>Ask our staff for a J&G Loyalty Card.</p></div>
+            <div><span>2</span><p><strong>Collect stamps</strong><br>Bring it with you on eligible purchases.</p></div>
+            <div><span>3</span><p><strong>Claim your reward</strong><br>Complete the card and follow the reward details printed on it.</p></div>
+          </div>
+
+          <a href="#contact" class="btn btn-red">Ask About the Loyalty Card</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews-section" id="reviews">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow dark">CUSTOMER LOVE</div>
+          <h2>What our customers say.</h2>
+          <p>We only show customer feedback that you choose to publish—no made-up testimonials.</p>
+        </div>
+
+        <div class="reviews-grid" id="reviewsGrid" aria-live="polite"></div>
+
+        <div class="reviews-empty reveal" id="reviewsEmpty">
+          <div class="reviews-empty-icon">💬</div>
+          <h3>Tried J&G Chicken Pastil?</h3>
+          <p>We’d love to hear your feedback. Send us a message on Facebook and your review may be featured here.</p>
+          <a id="reviewsFacebookLink" class="btn btn-red" href="#" target="_blank" rel="noopener">Send Feedback on Facebook</a>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="gallery">
       <div class="container">
         <div class="section-heading left reveal">
           <div class="eyebrow dark">GALLERY</div>
           <h2>A closer look at J&G.</h2>
-          <p>Our signature meals, Chicken Pastil in a Jar, and J&G BikeCart.</p>
+          <p>Our signature meals, Chicken Pastil in a Jar, customers, and J&G BikeCart.</p>
         </div>
 
         <div class="gallery-grid">
-          <button class="gallery-item large reveal" data-image="assets/gallery-1.jpg" data-title="Menu">
-            <img src="assets/gallery-1.jpg" alt="Menu" loading="lazy" />
+          <button class="gallery-item large reveal" data-image="assets/gallery-1.jpg" data-title="Menu" type="button">
+            <img src="assets/gallery-1.jpg" alt="J&G Chicken Pastil menu" loading="lazy" decoding="async" />
             <span>View</span>
           </button>
-          <button class="gallery-item reveal" data-image="assets/gallery-2.jpg" data-title="Chicken Pastil Customers">
-            <img src="assets/gallery-2.jpg" alt="Chicken Pastil Customers" loading="lazy" />
+
+          <button class="gallery-item reveal" data-image="assets/gallery-2.jpg" data-title="Chicken Pastil Customers" type="button">
+            <img src="assets/gallery-2.jpg" alt="J&G Chicken Pastil customers" loading="lazy" decoding="async" />
             <span>View</span>
           </button>
-          <button class="gallery-item reveal" data-image="assets/gallery-3.jpg" data-title="Chicken Pastil Customers">
-            <img src="assets/gallery-3.jpg" alt="Chicken Pastil Customers" loading="lazy" />
+
+          <button class="gallery-item reveal" data-image="assets/gallery-3.jpg" data-title="Chicken Pastil Customers" type="button">
+            <img src="assets/gallery-3.jpg" alt="J&G Chicken Pastil customers" loading="lazy" decoding="async" />
             <span>View</span>
           </button>
-          <button class="gallery-item reveal" data-image="assets/gallery-4.jpg" data-title="Bike Cart">
-            <img src="assets/gallery-4.jpg" alt="Bike Cart" loading="lazy" />
+
+          <button class="gallery-item reveal" data-image="assets/gallery-4.jpg" data-title="J&G BikeCart" type="button">
+            <img src="assets/gallery-4.jpg" alt="J&G Chicken Pastil BikeCart" loading="lazy" decoding="async" />
             <span>View</span>
           </button>
-          <button class="gallery-item reveal" data-image="assets/gallery-5.jpg" data-title="Tusok-Tusok">
-            <img src="assets/gallery-5.jpg" alt="Tusok-Tusok" loading="lazy" />
+
+          <button class="gallery-item reveal" data-image="assets/gallery-5.jpg" data-title="Tusok-Tusok" type="button">
+            <img src="assets/gallery-5.jpg" alt="J&G Tusok-Tusok" loading="lazy" decoding="async" />
             <span>View</span>
           </button>
         </div>
@@ -265,33 +480,51 @@
           <h2>Craving Chicken Pastil?</h2>
           <p>Visit J&G Chicken Pastil in Marulas, Valenzuela City or message our Facebook page for availability and inquiries.</p>
 
+          <div class="status-card" id="statusCard">
+            <div class="status-card-top">
+              <span class="status-dot neutral" id="statusDot"></span>
+              <div>
+                <span>Today</span>
+                <strong id="businessStatusText">Message us for today's hours</strong>
+              </div>
+            </div>
+            <p id="businessStatusDetail">Operating hours can be added in <code>script.js</code> once confirmed.</p>
+            <button type="button" class="hours-toggle" id="hoursToggle" aria-expanded="false">View business hours</button>
+            <div class="hours-list" id="hoursList" hidden></div>
+          </div>
+
           <div class="contact-list">
             <div class="contact-row">
               <div class="contact-icon">📍</div>
               <div><span>Location</span><strong>Pio Val, Marulas, Valenzuela City</strong></div>
             </div>
+
             <div class="contact-row">
               <div class="contact-icon">💬</div>
               <div><span>Facebook</span><strong>J&G Chicken Pastil</strong></div>
             </div>
+
             <div class="contact-row">
               <div class="contact-icon">📞</div>
-              <div><span>Contact Number</span><strong id="contactNumberText">Add your business number</strong></div>
+              <div><span>Contact Number</span><strong id="contactNumberText">0963-032-6793</strong></div>
             </div>
           </div>
 
           <div class="contact-actions">
-            <a id="facebookLink" class="btn btn-gold" href="#" target="_blank" rel="noopener">Open Facebook Page</a>
+            <a id="facebookLink" class="btn btn-gold" href="#" target="_blank" rel="noopener">Facebook Page</a>
+            <a id="messengerLink" class="btn btn-outline" href="#" target="_blank" rel="noopener">Messenger</a>
             <a id="phoneLink" class="btn btn-outline" href="#">Call / Text</a>
           </div>
         </div>
 
         <div class="location-card reveal">
           <div class="location-badge">
-            <img src="assets/logo.png" alt="J&G Chicken Pastil logo" loading="lazy" />
+            <img src="assets/logo.png" alt="J&G Chicken Pastil logo" loading="lazy" decoding="async" />
           </div>
+
           <h3>Pio Val, Marulas</h3>
           <p>Valenzuela City, Metro Manila</p>
+
           <div class="map-embed">
             <iframe
               src="https://www.google.com/maps?q=14.675873,120.9842109&z=17&output=embed"
@@ -304,6 +537,7 @@
               title="J&G Chicken Pastil Location">
             </iframe>
           </div>
+
           <a id="mapsLink" href="#" target="_blank" rel="noopener" class="text-button">Open in Google Maps →</a>
         </div>
       </div>
@@ -314,8 +548,9 @@
         <div>
           <span class="eyebrow">J&G CHICKEN PASTIL</span>
           <h2>Good food. Sulit price. Local flavor.</h2>
+          <p>Ready to order? Prepare your order details and continue in Messenger.</p>
         </div>
-        <a href="#menu" class="btn btn-light">See the Menu</a>
+        <button class="btn btn-light order-trigger" type="button">Order Now</button>
       </div>
     </section>
   </main>
@@ -324,41 +559,139 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <span class="brand-logo footer-logo">
-          <img src="assets/logo.png" alt="J&G Chicken Pastil logo" loading="lazy" />
+          <img src="assets/logo.png" alt="J&G Chicken Pastil logo" loading="lazy" decoding="async" />
         </span>
-        <div><strong>Chicken Pastil</strong><p>Made to satisfy.</p></div>
+        <div>
+          <strong>Chicken Pastil</strong>
+          <p>Made to satisfy.</p>
+        </div>
       </div>
+
       <div class="footer-links">
         <a href="#about">About</a>
         <a href="#menu">Menu</a>
         <a href="#jar">Pastil in a Jar</a>
+        <a href="#loyalty">Loyalty</a>
+        <a href="#reviews">Reviews</a>
         <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
       </div>
+
+      <div class="footer-social">
+        <a id="footerFacebookLink" href="#" target="_blank" rel="noopener">Facebook</a>
+        <span>•</span>
+        <a id="footerMessengerLink" href="#" target="_blank" rel="noopener">Messenger</a>
+      </div>
+
       <p class="copyright">© <span id="year"></span> J&G Chicken Pastil. All rights reserved.</p>
     </div>
   </footer>
 
+  <!-- Floating Messenger -->
+  <a
+    class="messenger-fab"
+    id="floatingMessenger"
+    href="#"
+    target="_blank"
+    rel="noopener"
+    aria-label="Message J&G Chicken Pastil on Messenger"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.914 1.454 5.514 3.726 7.211V22l3.405-1.869c.908.251 1.871.387 2.869.387 5.523 0 10-4.145 10-9.259C22 6.145 17.523 2 12 2Zm.994 12.469-2.547-2.718-4.97 2.718 5.467-5.807 2.609 2.718 4.909-2.718-5.468 5.807Z"/>
+    </svg>
+    <span>Message Us</span>
+  </a>
+
+  <!-- Menu Details Modal -->
   <div class="modal" id="menuModal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
+
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" aria-label="Close modal" data-close-modal>×</button>
+      <button class="modal-close" aria-label="Close menu details" data-close-modal type="button">×</button>
       <span class="modal-kicker">J&G MENU</span>
       <h3 id="modalTitle">Menu Item</h3>
       <div class="modal-price" id="modalPrice">₱0</div>
       <p id="modalDesc"></p>
-      <a href="#contact" class="btn btn-gold" data-close-modal>Ask / Order</a>
+      <button class="btn btn-gold modal-order-trigger" id="modalOrderButton" type="button">Add to Cart</button>
     </div>
   </div>
 
+  <!-- Order / Cart Modal -->
+  <div class="modal" id="orderModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-order-modal></div>
+
+    <div class="modal-card order-modal-card" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+      <button class="modal-close" aria-label="Close order cart" data-close-order-modal type="button">×</button>
+
+      <span class="modal-kicker">ORDER WITH J&G</span>
+      <div class="order-title-row">
+        <div>
+          <h3 id="orderModalTitle">Build your order</h3>
+          <p>Choose as many items as you want. You can mix meals, add-ons, and Chicken Pastil in a Jar.</p>
+        </div>
+        <div class="cart-total-badge" aria-live="polite">
+          <span>Cart</span>
+          <strong id="cartItemCount">0</strong>
+        </div>
+      </div>
+
+      <div class="order-catalog" id="orderCatalog" aria-label="J&G order choices"></div>
+
+      <section class="cart-summary" aria-labelledby="cartSummaryTitle">
+        <div class="cart-summary-head">
+          <div>
+            <span class="modal-kicker">YOUR CART</span>
+            <h4 id="cartSummaryTitle">Order summary</h4>
+          </div>
+          <button class="cart-clear" id="clearCartButton" type="button">Clear cart</button>
+        </div>
+
+        <div class="cart-empty" id="cartEmpty">Your cart is empty. Add an item above to start your order.</div>
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-total-row">
+          <span>Estimated item total</span>
+          <strong id="cartTotal">₱0</strong>
+        </div>
+      </section>
+
+      <div class="order-field">
+        <label for="orderNotes">Order notes <span>(optional)</span></label>
+        <textarea id="orderNotes" rows="3" maxlength="250" placeholder="Example: pickup time, special request, etc."></textarea>
+      </div>
+
+      <details class="order-preview-details">
+        <summary>Preview Messenger message</summary>
+        <div class="order-preview">
+          <p id="orderMessagePreview"></p>
+        </div>
+      </details>
+
+      <div class="order-modal-actions cart-actions">
+        <button class="btn btn-copy" type="button" id="copyOrderButton">Copy Order</button>
+        <button class="btn btn-gold" type="button" id="openMessengerOrderButton">Continue in Messenger</button>
+      </div>
+
+      <small class="order-help">The website prepares your order details only. Your order is confirmed after J&G replies to you on Messenger.</small>
+    </div>
+  </div>
+
+  <!-- Gallery Modal -->
   <div class="modal image-modal" id="imageModal" aria-hidden="true">
     <div class="modal-backdrop" data-close-image-modal></div>
+
     <div class="image-modal-card" role="dialog" aria-modal="true" aria-label="Gallery image preview">
-      <button class="modal-close" aria-label="Close image preview" data-close-image-modal>×</button>
+      <button class="modal-close" aria-label="Close image preview" data-close-image-modal type="button">×</button>
+
+      <button class="gallery-nav gallery-prev" id="galleryPrev" type="button" aria-label="Previous gallery image">‹</button>
       <img id="modalImage" src="" alt="Gallery preview" />
+      <button class="gallery-nav gallery-next" id="galleryNext" type="button" aria-label="Next gallery image">›</button>
+
       <div class="image-modal-caption" id="modalImageTitle"></div>
     </div>
   </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="script.js"></script>
 </body>
