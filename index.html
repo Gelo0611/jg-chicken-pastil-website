@@ -76,10 +76,6 @@
         </div>
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-
       <div class="nav-links" id="navLinks">
         <a href="#home" class="nav-link active" data-section="home" aria-current="page">Home</a>
         <a href="#about" class="nav-link" data-section="about">About</a>
@@ -87,7 +83,26 @@
         <a href="#jar" class="nav-link" data-section="jar">Pastil in a Jar</a>
         <a href="#gallery" class="nav-link" data-section="gallery">Gallery</a>
         <a href="#contact" class="nav-link" data-section="contact">Contact</a>
-        <button class="btn btn-sm btn-gold order-trigger nav-order-button" id="navOrderButton" type="button">Order Now <span class="cart-count" id="navCartCount" aria-label="0 items in cart">0</span></button>
+        <button class="btn btn-sm btn-gold order-trigger nav-order-button" id="navOrderButton" type="button">Order Now</button>
+      </div>
+
+      <div class="header-actions">
+        <button
+          class="header-cart-button order-trigger"
+          id="headerCartButton"
+          type="button"
+          aria-label="Open shopping cart, 0 items"
+          title="Open cart"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 4H3.75a.75.75 0 0 0 0 1.5h1.89l1.64 8.2A2.25 2.25 0 0 0 9.49 15.5h7.95a2.25 2.25 0 0 0 2.16-1.62l1.31-4.5A1.75 1.75 0 0 0 19.23 7H8.1L7.7 5A1.75 1.75 0 0 0 7 4Zm2.49 10a.75.75 0 0 1-.74-.6L7.77 8.5h11.46a.25.25 0 0 1 .24.32l-1.31 4.5a.75.75 0 0 1-.72.54H9.49ZM9.5 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm8 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/>
+          </svg>
+          <span class="header-cart-count" id="headerCartCount">0</span>
+        </button>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </nav>
   </header>

@@ -2420,3 +2420,221 @@ footer {
     transform: none;
   }
 }
+
+/* =========================================================
+   J&G V4 — RESPONSIVE POLISH
+   ========================================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.header-cart-button {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(118, 11, 18, .14);
+  border-radius: 50%;
+  background: #fff8ea;
+  color: var(--red-800);
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(73, 20, 13, .08);
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.header-cart-button:hover {
+  transform: translateY(-2px);
+  background: #fff1cf;
+  box-shadow: 0 12px 28px rgba(73, 20, 13, .13);
+}
+
+.header-cart-button:focus-visible {
+  outline: 3px solid rgba(224, 185, 74, .55);
+  outline-offset: 3px;
+}
+
+.header-cart-button svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.header-cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--gold-500);
+  color: #3b2400;
+  border: 2px solid var(--paper);
+  font-size: .65rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.header-cart-count.has-items {
+  background: var(--red-700);
+  color: #fff;
+}
+
+.header-cart-button.has-items {
+  background: #fff3d5;
+  box-shadow: 0 10px 26px rgba(151, 13, 23, .14);
+}
+
+/* Remove the oversized empty strip below the yellow CTA. */
+.cta-section {
+  padding-bottom: 24px;
+}
+
+/* Center copyright across the footer. */
+.copyright {
+  text-align: center;
+}
+
+/* Keep the order window rounded and away from browser edges. */
+.order-modal-card {
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+@supports (height: 100dvh) {
+  .order-modal-card {
+    max-height: min(900px, calc(100dvh - 56px));
+  }
+}
+
+@media (max-width: 980px) {
+  /* Responsive grid ordering: About text first, image second. */
+  #about .section-copy {
+    order: 1;
+  }
+
+  #about .about-photo-wrap {
+    order: 2;
+    margin: 18px auto 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-actions {
+    gap: 8px;
+  }
+
+  .header-cart-button {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .header-cart-button svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .modal {
+    padding:
+      max(22px, env(safe-area-inset-top))
+      14px
+      max(22px, env(safe-area-inset-bottom));
+  }
+
+  .order-modal-card {
+    width: 100%;
+    max-height: calc(100vh - 44px);
+    margin: auto;
+    border-radius: 26px;
+    padding-top: 32px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .34);
+  }
+
+  @supports (height: 100dvh) {
+    .order-modal-card {
+      max-height: calc(100dvh - 44px);
+    }
+  }
+
+  #about .about-photo-wrap {
+    width: min(100%, 520px);
+    margin-top: 24px;
+  }
+
+  .cta-section {
+    padding-bottom: 18px;
+  }
+
+  footer {
+    padding-top: 36px;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-copy strong {
+    font-size: .92rem;
+  }
+
+  .header-actions {
+    gap: 5px;
+  }
+
+  .header-cart-button {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .menu-toggle {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .order-modal-card {
+    border-radius: 22px;
+  }
+}
+
+/* =========================================================
+   J&G V4.1 — CART POSITION FIX
+   Desktop: cart sits at the far right beside Order Now.
+   Mobile: cart remains visible beside the hamburger button.
+   ========================================================= */
+@media (min-width: 981px) {
+  .navbar {
+    justify-content: flex-start;
+  }
+
+  .nav-links {
+    margin-left: auto;
+  }
+
+  .header-actions {
+    margin-left: 10px;
+  }
+
+  .header-actions .menu-toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .header-actions {
+    margin-left: auto;
+  }
+}
+

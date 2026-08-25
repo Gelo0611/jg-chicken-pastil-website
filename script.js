@@ -381,7 +381,8 @@ const cartItems = $("#cartItems");
 const cartEmpty = $("#cartEmpty");
 const cartTotal = $("#cartTotal");
 const cartItemCount = $("#cartItemCount");
-const navCartCount = $("#navCartCount");
+const headerCartButton = $("#headerCartButton");
+const headerCartCount = $("#headerCartCount");
 const clearCartButton = $("#clearCartButton");
 const orderNotes = $("#orderNotes");
 const orderMessagePreview = $("#orderMessagePreview");
@@ -441,10 +442,18 @@ function updateCartCountBadges() {
   const count = getCartCount();
 
   if (cartItemCount) cartItemCount.textContent = String(count);
-  if (navCartCount) {
-    navCartCount.textContent = String(count);
-    navCartCount.setAttribute("aria-label", `${count} item${count === 1 ? "" : "s"} in cart`);
-    navCartCount.classList.toggle("has-items", count > 0);
+
+  if (headerCartCount) {
+    headerCartCount.textContent = String(count);
+    headerCartCount.classList.toggle("has-items", count > 0);
+  }
+
+  if (headerCartButton) {
+    headerCartButton.setAttribute(
+      "aria-label",
+      `Open shopping cart, ${count} item${count === 1 ? "" : "s"}`
+    );
+    headerCartButton.classList.toggle("has-items", count > 0);
   }
 }
 
