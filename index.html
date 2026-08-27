@@ -58,7 +58,7 @@
 
   <div class="announcement">
     <p>
-      🔥 Freshly served Chicken Pastil
+      <span id="businessAnnouncement">🔥 Freshly served Chicken Pastil</span>
       <span class="announcement-dot">•</span>
       <span id="announcementLocation">Today's BikeCart Location: Pio Val, Marulas</span>
       <span class="announcement-dot">•</span>
@@ -214,7 +214,7 @@
         </div>
 
         <div class="menu-grid">
-          <article class="menu-card reveal">
+          <article class="menu-card reveal" data-product-card="chicken-pastil">
             <div class="menu-photo">
               <img
                 src="assets/menu-pastil.jpg"
@@ -236,7 +236,7 @@
             </div>
           </article>
 
-          <article class="menu-card reveal">
+          <article class="menu-card reveal" data-product-card="value-meal">
             <div class="menu-photo">
               <img
                 src="assets/menu-value.jpg"
@@ -258,7 +258,7 @@
             </div>
           </article>
 
-          <article class="menu-card featured reveal">
+          <article class="menu-card featured reveal" data-product-card="busog-meal">
             <div class="card-tag">Best Seller</div>
             <div class="menu-photo">
               <img
@@ -281,7 +281,7 @@
             </div>
           </article>
 
-          <article class="menu-card premium reveal">
+          <article class="menu-card premium reveal" data-product-card="premium-meal">
             <div class="card-tag gold-tag">Premium</div>
             <div class="menu-photo">
               <img
@@ -304,7 +304,7 @@
             </div>
           </article>
 
-          <article class="menu-card reveal">
+          <article class="menu-card reveal" data-product-card="extra-busog">
             <div class="menu-photo">
               <img
                 src="assets/menu-extra-busog.jpg"
@@ -326,7 +326,7 @@
             </div>
           </article>
 
-          <article class="menu-card reveal">
+          <article class="menu-card reveal" data-product-card="tusok-tusok">
             <div class="menu-photo">
               <img
                 src="assets/menu-tusok.jpg"
@@ -351,14 +351,14 @@
 
         <div class="addons reveal">
           <strong>Add-ons:</strong>
-          <span>Extra Rice ₱15</span>
-          <span>Boiled Egg ₱15</span>
-          <span>Gulaman ₱10</span>
+          <span data-addon-product="extra-rice">Extra Rice ₱15</span>
+          <span data-addon-product="boiled-egg">Boiled Egg ₱15</span>
+          <span data-addon-product="gulaman">Gulaman ₱10</span>
         </div>
       </div>
     </section>
 
-    <section class="section jar-section" id="jar">
+    <section class="section jar-section" id="jar" data-product-section="pastil-jar">
       <div class="container jar-grid">
         <div class="jar-copy reveal">
           <div class="eyebrow">TAKE J&G HOME</div>

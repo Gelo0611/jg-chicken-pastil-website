@@ -1,4 +1,101 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#970d17"><title>J&G Owner Location Manager</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="owner-location.css"></head><body class="owner-page"><main class="owner-shell">
-<section class="owner-card owner-login-card" id="loginPanel"><div class="owner-brand"><img src="assets/logo.png" alt="J&G Chicken Pastil logo"><div><span>J&G CHICKEN PASTIL</span><h1>Owner Location Manager</h1></div></div><p class="owner-muted">Sign in with your owner account. Customers cannot change the BikeCart location.</p><form id="ownerLoginForm" class="owner-form"><label>Email<input id="ownerEmail" type="email" autocomplete="username" required placeholder="your@email.com"></label><label>Password<input id="ownerPassword" type="password" autocomplete="current-password" required placeholder="Your password"></label><button class="btn btn-gold" type="submit">Sign In</button></form><p class="owner-status" id="loginStatus" role="status"></p></section>
-<section class="owner-dashboard" id="dashboardPanel" hidden><div class="owner-dashboard-head"><div><span class="owner-kicker">J&G OWNER PANEL</span><h1>BikeCart Locations</h1></div><div class="owner-dashboard-actions"><a class="owner-top-action owner-view-site" href="index.html" target="_blank" rel="noopener"><span>View Website</span><span class="owner-action-icon" aria-hidden="true">↗</span></a><button class="owner-top-action owner-logout" id="logoutButton" type="button"><span>Log Out</span></button></div></div><div class="owner-current-box"><span>CURRENT PUBLIC LOCATION</span><strong id="ownerCurrentLocation">Loading…</strong></div><div class="owner-grid"><section class="owner-card"><div class="owner-section-title"><div><span class="owner-kicker">SAVED LOCATIONS</span><h2>Your BikeCart spots</h2></div><button class="btn btn-red owner-small-btn" id="newLocationButton" type="button">+ Add Location</button></div><div class="owner-location-list" id="ownerLocationList"><p class="owner-muted">Loading saved locations…</p></div></section><section class="owner-card"><span class="owner-kicker">LOCATION DETAILS</span><h2 id="locationFormTitle">Add a location</h2><form id="locationForm" class="owner-form"><input id="locationId" type="hidden"><label>Location name<input id="locationName" type="text" maxlength="100" required placeholder="Example: Pio Val, Marulas"></label><label>Area / city<input id="locationArea" type="text" maxlength="120" required placeholder="Example: Valenzuela City, Metro Manila"></label><label>Full address / landmark<textarea id="locationAddress" rows="3" maxlength="250" required placeholder="What customers should read as the address"></textarea></label><div class="owner-two-col"><label>Latitude<input id="locationLatitude" type="number" step="any" required placeholder="14.675873"></label><label>Longitude<input id="locationLongitude" type="number" step="any" required placeholder="120.9842109"></label></div><label>Google Maps share link<input id="locationMapsUrl" type="url" placeholder="https://maps.google.com/..."></label><p class="owner-tip">Tip: Save both locations once. After that you normally only need the “Set as Current” button.</p><div class="owner-form-actions"><button class="btn btn-gold" type="submit">Save Location</button><button class="btn owner-outline-btn" id="cancelEditButton" type="button">Cancel</button></div></form><p class="owner-status" id="adminStatus" role="status"></p></section></div></section>
-</main><script src="location-config.js"></script><script src="owner-location.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#970d17">
+  <title>J&G Owner Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="owner-location.css">
+</head>
+<body class="owner-page">
+  <main class="owner-shell">
+    <section class="owner-card owner-login-card" id="loginPanel">
+      <div class="owner-brand"><img src="assets/logo.png" alt="J&G Chicken Pastil logo"><div><span>J&G CHICKEN PASTIL</span><h1>Owner Dashboard</h1></div></div>
+      <p class="owner-muted">Sign in with your owner account to manage the public website.</p>
+      <form id="ownerLoginForm" class="owner-form">
+        <label>Email<input id="ownerEmail" type="email" autocomplete="username" required placeholder="your@email.com"></label>
+        <label>Password<input id="ownerPassword" type="password" autocomplete="current-password" required placeholder="Your password"></label>
+        <button class="btn btn-gold" type="submit">Sign In</button>
+      </form>
+      <p class="owner-status" id="loginStatus" role="status"></p>
+    </section>
+
+    <section class="owner-dashboard" id="dashboardPanel" hidden>
+      <header class="owner-dashboard-head">
+        <div><span class="owner-kicker">J&G OWNER PANEL</span><h1>Website Control Center</h1></div>
+        <div class="owner-dashboard-actions">
+          <a class="owner-top-action owner-view-site" href="index.html" target="_blank" rel="noopener"><span>View Website</span><span class="owner-action-icon" aria-hidden="true">↗</span></a>
+          <button class="owner-top-action owner-logout" id="logoutButton" type="button"><span>Log Out</span></button>
+        </div>
+      </header>
+
+      <nav class="owner-quick-nav" aria-label="Owner dashboard sections">
+        <a href="#ownerLocationSection">Location</a><a href="#ownerAvailabilitySection">Availability</a><a href="#ownerAnnouncementSection">Announcement</a><a href="#ownerReviewsSection">Reviews</a>
+      </nav>
+
+      <section id="ownerLocationSection">
+        <div class="owner-current-box"><span>CURRENT PUBLIC LOCATION</span><strong id="ownerCurrentLocation">Loading…</strong></div>
+        <div class="owner-grid">
+          <section class="owner-card">
+            <div class="owner-section-title"><div><span class="owner-kicker">SAVED LOCATIONS</span><h2>Your BikeCart spots</h2></div><button class="btn btn-red owner-small-btn" id="newLocationButton" type="button">+ Add Location</button></div>
+            <div class="owner-location-list" id="ownerLocationList"><p class="owner-muted">Loading saved locations…</p></div>
+          </section>
+          <section class="owner-card">
+            <span class="owner-kicker">LOCATION DETAILS</span><h2 id="locationFormTitle">Add a location</h2>
+            <form id="locationForm" class="owner-form">
+              <input id="locationId" type="hidden">
+              <label>Location name<input id="locationName" type="text" maxlength="100" required placeholder="Example: Pio Val, Marulas"></label>
+              <label>Area / city<input id="locationArea" type="text" maxlength="120" required placeholder="Example: Valenzuela City, Metro Manila"></label>
+              <label>Full address / landmark<textarea id="locationAddress" rows="3" maxlength="250" required placeholder="What customers should read as the address"></textarea></label>
+              <div class="owner-two-col"><label>Latitude<input id="locationLatitude" type="number" step="any" required placeholder="14.675873"></label><label>Longitude<input id="locationLongitude" type="number" step="any" required placeholder="120.9842109"></label></div>
+              <label>Google Maps share link<input id="locationMapsUrl" type="url" placeholder="https://maps.google.com/..."></label>
+              <p class="owner-tip">Save your regular BikeCart spots once. After that, use “Set as Current” whenever you move.</p>
+              <div class="owner-form-actions"><button class="btn btn-gold" type="submit">Save Location</button><button class="btn owner-outline-btn" id="cancelEditButton" type="button">Cancel</button></div>
+            </form>
+            <p class="owner-status" id="adminStatus" role="status"></p>
+          </section>
+        </div>
+      </section>
+
+      <section class="owner-card owner-wide-card" id="ownerAvailabilitySection">
+        <div class="owner-section-title"><div><span class="owner-kicker">TODAY'S MENU</span><h2>Product Availability</h2><p class="owner-section-copy">Turn an item off when it is sold out. Customers will no longer be able to add it to cart.</p></div></div>
+        <div class="owner-product-list" id="ownerProductList"><p class="owner-muted">Loading menu availability…</p></div>
+        <p class="owner-status" id="availabilityStatus" role="status"></p>
+      </section>
+
+      <section class="owner-card owner-wide-card" id="ownerAnnouncementSection">
+        <span class="owner-kicker">WEBSITE ANNOUNCEMENT</span><h2>Announcement Bar</h2><p class="owner-section-copy">Update the short message shown at the very top of the public website.</p>
+        <form class="owner-form owner-announcement-form" id="announcementForm">
+          <label>Announcement<input id="announcementInput" type="text" maxlength="140" placeholder="🔥 Freshly served Chicken Pastil" required></label>
+          <div class="owner-announcement-preview"><span>Preview</span><strong id="announcementPreview">🔥 Freshly served Chicken Pastil</strong></div>
+          <button class="btn btn-gold owner-fit-btn" type="submit">Update Announcement</button>
+        </form>
+        <p class="owner-status" id="announcementStatus" role="status"></p>
+      </section>
+
+      <section class="owner-card owner-wide-card" id="ownerReviewsSection">
+        <div class="owner-section-title"><div><span class="owner-kicker">CUSTOMER LOVE</span><h2>Customer Reviews</h2><p class="owner-section-copy">Add only genuine feedback that the customer allowed you to publish.</p></div></div>
+        <div class="owner-review-layout">
+          <form class="owner-form owner-review-form" id="reviewForm">
+            <input id="reviewId" type="hidden">
+            <label>Customer name<input id="reviewName" type="text" maxlength="100" required placeholder="Customer name"></label>
+            <label>Rating<select id="reviewRating" required><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></label>
+            <label>Feedback<textarea id="reviewText" rows="4" maxlength="500" required placeholder="Customer's exact feedback"></textarea></label>
+            <label class="owner-checkbox-row"><input id="reviewPublished" type="checkbox" checked><span>Publish on website</span></label>
+            <div class="owner-form-actions"><button class="btn btn-gold" id="saveReviewButton" type="submit">Add Review</button><button class="btn owner-outline-btn" id="cancelReviewEditButton" type="button">Cancel</button></div>
+          </form>
+          <div><div class="owner-review-list" id="ownerReviewList"><p class="owner-muted">Loading reviews…</p></div></div>
+        </div>
+        <p class="owner-status" id="reviewStatus" role="status"></p>
+      </section>
+    </section>
+  </main>
+  <script src="location-config.js"></script>
+  <script src="owner-location.js"></script>
+</body>
+</html>

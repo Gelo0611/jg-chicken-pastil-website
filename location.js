@@ -52,6 +52,15 @@
   function apply(location) {
     const data = { ...fallback, ...location };
 
+    window.JG_CURRENT_LOCATION = {
+      name: data.name,
+      area: data.area,
+      address: data.address,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      googleMapsUrl: mapsUrl(data)
+    };
+
     if (el("announcementLocation")) {
       el("announcementLocation").textContent = `Today's BikeCart Location: ${data.name}`;
     }

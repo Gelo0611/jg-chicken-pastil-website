@@ -34,7 +34,7 @@ const BUSINESS = {
 //   rating: 5,
 //   text: "Masarap at sulit ang serving!"
 // }
-const REVIEWS = [
+let REVIEWS = [
   {
    name: "Jernz Torregosa",
    rating: 5,
@@ -52,6 +52,24 @@ const REVIEWS = [
 // ======================================================
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+
+const SUPABASE_CONFIG = window.JG_LOCATION_CONFIG || {};
+const SUPABASE_PUBLIC_READY =
+  typeof SUPABASE_CONFIG.supabaseUrl === "string" &&
+  typeof SUPABASE_CONFIG.supabasePublishableKey === "string" &&
+  SUPABASE_CONFIG.supabaseUrl.startsWith("https://") &&
+  !SUPABASE_CONFIG.supabaseUrl.includes("YOUR_SUPABASE") &&
+  !SUPABASE_CONFIG.supabasePublishableKey.includes("YOUR_SUPABASE");
+
+async function publicSupabaseRequest(path) {
+  if (!SUPABASE_PUBLIC_READY) return null;
+  const base = SUPABASE_CONFIG.supabaseUrl.replace(/\/+$/, "");
+  const response = await fetch(base + path, {
+    headers: { apikey: SUPABASE_CONFIG.supabasePublishableKey, Accept: "application/json" }
+  });
+  if (!response.ok) throw new Error(`Supabase request failed (${response.status})`);
+  return response.json();
+}
 
 function clampNumber(value, min, max, fallback = min) {
   const numeric = Number.parseInt(value, 10);
@@ -361,6 +379,12 @@ $$('.open-menu-modal').forEach((button) => {
     if (modalPrice) modalPrice.textContent = button.dataset.price || "";
     if (modalDesc) modalDesc.textContent = button.dataset.desc || "";
 
+    if (modalOrderButton) {
+      const available = isProductAvailable(currentDetailProductId);
+      modalOrderButton.disabled = !available;
+      modalOrderButton.textContent = available ? "Add to Cart" : "Sold Out";
+    }
+
     openModal(menuModal);
   });
 });
@@ -386,7 +410,12 @@ const PRODUCTS = [
 ];
 
 const productMap = new Map(PRODUCTS.map((product) => [product.id, product]));
+const PRODUCT_AVAILABILITY = new Map(PRODUCTS.map((product) => [product.id, true]));
 const CART_STORAGE_KEY = "jg-chicken-pastil-cart-v1";
+
+function isProductAvailable(productId) {
+  return PRODUCT_AVAILABILITY.get(productId) !== false;
+}
 
 const orderModal = $("#orderModal");
 const orderCatalog = $("#orderCatalog");
@@ -473,7 +502,13 @@ function updateCartCountBadges() {
 function setCartQuantity(productId, quantity) {
   if (!productMap.has(productId)) return;
 
-  const safeQuantity = clampNumber(quantity, 0, 99, 0);
+  const requestedQuantity = clampNumber(quantity, 0, 99, 0);
+  if (requestedQuantity > 0 && !isProductAvailable(productId)) {
+    const product = productMap.get(productId);
+    showToast(`${product?.name || "This item"} is currently sold out.`);
+    return;
+  }
+  const safeQuantity = requestedQuantity;
 
   if (safeQuantity <= 0) delete cart[productId];
   else cart[productId] = safeQuantity;
@@ -485,6 +520,10 @@ function setCartQuantity(productId, quantity) {
 function addToCart(productId, amount = 1) {
   const product = productMap.get(productId);
   if (!product) return;
+  if (!isProductAvailable(productId)) {
+    showToast(`${product.name} is currently sold out.`);
+    return;
+  }
 
   const nextQuantity = clampNumber((cart[productId] || 0) + amount, 0, 99, 1);
   setCartQuantity(productId, nextQuantity);
@@ -510,6 +549,13 @@ function buildOrderMessage() {
     `\n\nEstimated item total: ${formatPeso(getCartTotal())}`;
 
   if (notes) message += `\nNotes: ${notes}`;
+
+  const pickup = window.JG_CURRENT_LOCATION;
+  if (pickup?.name) {
+    message += `\n\nPickup location: ${pickup.name}`;
+    if (pickup.address && pickup.address !== pickup.name) message += `\n${pickup.address}`;
+    if (pickup.googleMapsUrl && pickup.googleMapsUrl !== "#contact") message += `\nMap: ${pickup.googleMapsUrl}`;
+  }
 
   message += "\n\nPlease confirm availability and final total. Thank you!";
   return message;
@@ -538,7 +584,8 @@ function renderOrderCatalog() {
 
     PRODUCTS.filter((product) => product.category === category).forEach((product) => {
       const row = document.createElement("div");
-      row.className = "order-choice";
+      const available = isProductAvailable(product.id);
+      row.className = `order-choice${available ? "" : " sold-out"}`;
       row.dataset.productId = product.id;
 
       const info = document.createElement("div");
@@ -548,7 +595,7 @@ function renderOrderCatalog() {
       name.textContent = product.name;
 
       const price = document.createElement("span");
-      price.textContent = formatPeso(product.price);
+      price.textContent = available ? formatPeso(product.price) : `${formatPeso(product.price)} • SOLD OUT`;
 
       info.append(name, price);
 
@@ -562,6 +609,7 @@ function renderOrderCatalog() {
       minus.dataset.productId = product.id;
       minus.setAttribute("aria-label", `Remove one ${product.name}`);
       minus.textContent = "−";
+      minus.disabled = !available;
 
       const quantity = document.createElement("span");
       quantity.className = "cart-quantity-value";
@@ -575,6 +623,7 @@ function renderOrderCatalog() {
       plus.dataset.productId = product.id;
       plus.setAttribute("aria-label", `Add one ${product.name}`);
       plus.textContent = "+";
+      plus.disabled = !available;
 
       control.append(minus, quantity, plus);
       row.append(info, control);
@@ -955,6 +1004,82 @@ function renderReviews() {
 }
 
 renderReviews();
+
+// ======================================================
+// OWNER-MANAGED WEBSITE DATA
+// ======================================================
+const businessAnnouncement = $("#businessAnnouncement");
+
+function applyProductAvailabilityToWebsite() {
+  PRODUCTS.forEach((product) => {
+    const available = isProductAvailable(product.id);
+    const card = document.querySelector(`[data-product-card="${product.id}"]`);
+    if (card) card.classList.toggle("sold-out", !available);
+
+    $$(`.add-to-cart[data-product-id="${product.id}"]`).forEach((button) => {
+      button.disabled = !available;
+      button.setAttribute("aria-disabled", String(!available));
+      button.textContent = product.id === "pastil-jar"
+        ? (available ? "Add Jar to Cart" : "Sold Out")
+        : (available ? "Add to Cart" : "Sold Out");
+    });
+
+    $$(`[data-addon-product="${product.id}"]`).forEach((element) => {
+      element.classList.toggle("sold-out", !available);
+    });
+  });
+
+  const jarSection = document.querySelector('[data-product-section="pastil-jar"]');
+  if (jarSection) jarSection.classList.toggle("product-sold-out", !isProductAvailable("pastil-jar"));
+}
+
+function removeUnavailableItemsFromCart() {
+  let changed = false;
+  Object.keys(cart).forEach((productId) => {
+    if (!isProductAvailable(productId)) {
+      delete cart[productId];
+      changed = true;
+    }
+  });
+  if (changed) {
+    saveCart();
+    showToast("Sold-out items were removed from your cart.");
+  }
+}
+
+async function loadOwnerManagedWebsiteData() {
+  if (!SUPABASE_PUBLIC_READY) return;
+  try {
+    const [availabilityRows, settingRows, reviewRows] = await Promise.all([
+      publicSupabaseRequest("/rest/v1/product_availability?select=product_id,is_available&order=sort_order.asc"),
+      publicSupabaseRequest("/rest/v1/site_settings?select=setting_key,setting_value&setting_key=eq.announcement"),
+      publicSupabaseRequest("/rest/v1/customer_reviews?select=id,name,rating,review_text,created_at&is_published=eq.true&order=created_at.desc")
+    ]);
+
+    if (Array.isArray(availabilityRows)) {
+      availabilityRows.forEach((row) => {
+        if (productMap.has(row.product_id)) PRODUCT_AVAILABILITY.set(row.product_id, row.is_available !== false);
+      });
+      removeUnavailableItemsFromCart();
+      applyProductAvailabilityToWebsite();
+      renderOrderCatalog();
+      renderCartUI();
+    }
+
+    if (Array.isArray(settingRows) && settingRows[0]?.setting_value && businessAnnouncement) {
+      businessAnnouncement.textContent = settingRows[0].setting_value;
+    }
+
+    if (Array.isArray(reviewRows)) {
+      REVIEWS = reviewRows.map((row) => ({ name: row.name, rating: row.rating, text: row.review_text }));
+      renderReviews();
+    }
+  } catch (error) {
+    console.warn("Owner-managed website data could not be loaded. Using website fallbacks.", error);
+  }
+}
+
+loadOwnerManagedWebsiteData();
 
 // ======================================================
 // GALLERY IMAGE MODAL + PREV / NEXT
