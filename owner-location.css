@@ -542,3 +542,564 @@
     padding-right: 12px;
   }
 }
+
+/* =========================================================
+   J&G V7.6 — FINAL MOBILE STABILITY LAYER
+   Purpose: one authoritative mobile override at the END of
+   this file so older V5/V6/V7 rules cannot break alignment,
+   corners, or field widths on iPhone/Android.
+   ========================================================= */
+
+/* Prevent width + padding from overflowing any owner control. */
+.owner-page,
+.owner-page *,
+.owner-page *::before,
+.owner-page *::after {
+  box-sizing: border-box;
+}
+
+.owner-page img,
+.owner-page svg,
+.owner-page input,
+.owner-page textarea,
+.owner-page select,
+.owner-page button {
+  max-width: 100%;
+}
+
+@media (max-width: 700px) {
+  /* Keep a consistent red frame around the admin cards. */
+  .owner-page {
+    padding: 14px 12px 30px !important;
+    overflow-x: hidden;
+  }
+
+  .owner-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .owner-dashboard {
+    width: 100%;
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+
+  /* Restore ALL four corners. Older V7.4 rules used top-only corners. */
+  .owner-card,
+  .owner-card.owner-wide-card,
+  .owner-login-card,
+  .sales-entry-card,
+  .sales-month-toolbar,
+  .monthly-summary-card,
+  .sales-chart-card,
+  .monthly-records-card {
+    border-radius: 24px !important;
+  }
+
+  .owner-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 16px !important;
+    box-shadow: 0 14px 34px rgba(35, 4, 7, .12) !important;
+    overflow: hidden;
+  }
+
+  .owner-card.owner-wide-card {
+    margin-top: 16px !important;
+  }
+
+  #ownerLocationSection,
+  #ownerSalesSection,
+  #ownerAvailabilitySection,
+  #ownerAnnouncementSection,
+  #ownerReviewsSection {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .owner-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .owner-current-box {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 16px;
+    padding: 16px !important;
+    border-radius: 22px !important;
+    overflow-wrap: anywhere;
+  }
+
+  .owner-current-box strong {
+    font-size: clamp(1.35rem, 7.2vw, 1.85rem) !important;
+    line-height: 1.15;
+  }
+
+  /* Header + navigation stay aligned inside the viewport. */
+  .owner-dashboard-head {
+    width: 100%;
+    margin: 0 0 14px !important;
+    padding: 6px 2px 0 !important;
+  }
+
+  .owner-dashboard-head h1 {
+    font-size: clamp(2rem, 10vw, 2.75rem) !important;
+    overflow-wrap: anywhere;
+  }
+
+  .owner-dashboard-actions {
+    width: 100%;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px;
+  }
+
+  .owner-top-action {
+    min-width: 0;
+    width: 100% !important;
+  }
+
+  .owner-quick-nav {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 14px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    border-radius: 18px !important;
+  }
+
+  .owner-quick-nav a {
+    min-width: 0;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  /* Titles are intentionally smaller on phones to avoid awkward wrapping. */
+  .owner-card h2,
+  .owner-section-title.owner-sales-heading h2 {
+    font-size: clamp(2rem, 9.5vw, 2.55rem) !important;
+    line-height: 1.03;
+    overflow-wrap: anywhere;
+  }
+
+  .owner-section-copy {
+    font-size: .98rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .owner-section-title {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  /* Location cards */
+  .owner-location-item {
+    width: 100%;
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+    padding: 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .owner-location-item-top {
+    align-items: flex-start;
+  }
+
+  .owner-location-info strong {
+    font-size: 1.05rem;
+    overflow-wrap: anywhere;
+  }
+
+  .owner-location-info p {
+    font-size: .92rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .owner-location-actions {
+    display: flex !important;
+    width: 100%;
+    justify-content: flex-start !important;
+    gap: 8px;
+  }
+
+  .owner-location-actions .btn,
+  .owner-location-actions .owner-delete-button {
+    width: auto !important;
+    min-width: 0;
+  }
+
+  /* General form widths. Critical fix for iOS fields extending outside cards. */
+  .owner-form,
+  .owner-form label,
+  .owner-two-col,
+  .sales-cost-input-grid,
+  .sales-product-entry-grid,
+  .sales-expenses-box,
+  .sales-expense-rows,
+  .sales-expense-row {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .owner-form input:not([type="checkbox"]):not([type="hidden"]),
+  .owner-form textarea,
+  .owner-form select,
+  .sales-month-toolbar input[type="month"] {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Undo V7.4's generic 52px input rule for checkbox controls. */
+  .owner-checkbox-row input[type="checkbox"] {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+    flex: 0 0 22px;
+    margin: 0;
+  }
+
+  .owner-checkbox-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  /* Sales entry */
+  .sales-entry-card {
+    padding: 18px 14px !important;
+    overflow: hidden;
+  }
+
+  .sales-form-title {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+  }
+
+  .sales-form-title h3 {
+    font-size: clamp(1.9rem, 9vw, 2.35rem) !important;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+
+  .sales-date-label {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .sales-audit-tip {
+    width: 100%;
+    padding: 14px !important;
+    border-radius: 18px !important;
+  }
+
+  .sales-audit-tip span {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .sales-product-entry-grid,
+  .sales-cost-input-grid,
+  .monthly-summary-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sales-product-entry {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) 80px !important;
+    padding: 14px !important;
+    border-radius: 18px !important;
+    overflow: hidden;
+  }
+
+  .sales-product-entry > span {
+    min-width: 0;
+  }
+
+  .sales-product-entry input {
+    width: 80px !important;
+    max-width: 80px !important;
+    min-width: 0 !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .sales-expenses-head {
+    align-items: flex-start !important;
+    gap: 10px;
+  }
+
+  .sales-expenses-head > div {
+    min-width: 0;
+  }
+
+  .sales-expenses-head .owner-link-button {
+    flex: 0 0 auto;
+    max-width: 42%;
+    text-align: right;
+    white-space: normal;
+  }
+
+  .sales-expense-row {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .sales-expense-remove {
+    width: 100% !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    border-radius: 12px !important;
+  }
+
+  .daily-live-summary {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .daily-live-summary > div {
+    border-radius: 18px !important;
+  }
+
+  /* Monthly Analytics: no huge blank area, no input overflow. */
+  .sales-analytics-panel {
+    width: 100%;
+    min-width: 0;
+    gap: 14px !important;
+  }
+
+  .sales-month-toolbar {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    gap: 16px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 18px 16px !important;
+    overflow: hidden;
+  }
+
+  .sales-month-toolbar > div {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
+    margin: 0 !important;
+  }
+
+  .sales-month-toolbar h3 {
+    margin: 4px 0 0 !important;
+    font-size: clamp(2rem, 9.5vw, 2.45rem) !important;
+    line-height: 1.03;
+    overflow-wrap: anywhere;
+  }
+
+  .sales-month-toolbar label {
+    display: grid !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: none !important;
+    font-size: .92rem !important;
+  }
+
+  .sales-month-toolbar input[type="month"] {
+    height: 50px !important;
+    min-height: 50px !important;
+    padding: 0 12px !important;
+    border-radius: 14px !important;
+    text-align: center;
+    font-size: 1rem !important;
+    font-weight: 800;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .monthly-summary-card {
+    width: 100%;
+    padding: 16px !important;
+    overflow: hidden;
+  }
+
+  .monthly-summary-card strong {
+    font-size: clamp(1.7rem, 8.5vw, 2rem) !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* Chart: keep it inside a rounded card and scroll only internally. */
+  .sales-chart-card,
+  .monthly-records-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px 14px !important;
+    overflow: hidden !important;
+  }
+
+  .sales-chart-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sales-trend-chart {
+    min-width: 520px;
+    height: 240px;
+  }
+
+  /* Daily records: use cards on mobile, not a clipped table. */
+  .sales-records-table-wrap {
+    display: none !important;
+  }
+
+  .sales-records-mobile-list {
+    display: block !important;
+    width: 100%;
+  }
+
+  .sales-record-card {
+    width: 100%;
+    border-radius: 18px !important;
+    overflow: hidden;
+  }
+
+  .sales-record-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sales-records-pagination {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    width: 100%;
+    gap: 10px !important;
+  }
+
+  .sales-records-pagination[hidden] {
+    display: none !important;
+  }
+
+  #salesPageIndicator {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    padding-top: 2px;
+  }
+
+  .sales-page-button {
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  /* Product availability */
+  .owner-product-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  .owner-product-row {
+    width: 100%;
+    padding: 14px !important;
+    border-radius: 18px !important;
+    min-width: 0;
+  }
+
+  .owner-product-copy {
+    min-width: 0;
+  }
+
+  .owner-product-copy strong {
+    overflow-wrap: anywhere;
+  }
+
+  /* Announcement + Reviews */
+  .owner-announcement-form,
+  .owner-review-form,
+  .owner-review-layout,
+  .owner-review-list,
+  .owner-review-item {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .owner-announcement-preview,
+  .owner-review-form,
+  .owner-review-item {
+    border-radius: 18px !important;
+  }
+
+  .owner-review-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .owner-review-top {
+    gap: 10px;
+  }
+
+  .owner-review-top > div {
+    min-width: 0;
+  }
+
+  .owner-review-top strong,
+  .owner-review-item p {
+    overflow-wrap: anywhere;
+  }
+
+  .owner-form-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100%;
+  }
+
+  .owner-form-actions .btn,
+  .owner-fit-btn {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .owner-page {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .owner-card {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    border-radius: 22px !important;
+  }
+
+  .owner-dashboard-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sales-product-entry {
+    grid-template-columns: minmax(0, 1fr) 72px !important;
+  }
+
+  .sales-product-entry input {
+    width: 72px !important;
+    max-width: 72px !important;
+  }
+}
