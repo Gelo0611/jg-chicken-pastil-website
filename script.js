@@ -34,7 +34,18 @@ const BUSINESS = {
 //   rating: 5,
 //   text: "Masarap at sulit ang serving!"
 // }
-const REVIEWS = [];
+const REVIEWS = [
+  {
+   name: "Jernz Torregosa",
+   rating: 5,
+   text: "Yummy"
+  },
+  {
+   name: "Melanie M. Canas III",
+   rating: 5,
+   text: "Yummy 😋"
+  }
+];
 
 // ======================================================
 // SMALL HELPERS
@@ -103,6 +114,7 @@ const footerFacebookLink = $("#footerFacebookLink");
 const footerMessengerLink = $("#footerMessengerLink");
 const jarMessengerLink = $("#jarMessengerLink");
 const reviewsFacebookLink = $("#reviewsFacebookLink");
+const reviewsMessengerLink = $("#reviewsMessengerLink");
 
 [
   facebookLink,
@@ -116,7 +128,8 @@ const reviewsFacebookLink = $("#reviewsFacebookLink");
   messengerLink,
   floatingMessenger,
   footerMessengerLink,
-  jarMessengerLink
+  jarMessengerLink,
+  reviewsMessengerLink
 ].filter(Boolean).forEach((link) => {
   link.href = BUSINESS.messengerUrl;
 });
