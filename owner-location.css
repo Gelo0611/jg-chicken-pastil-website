@@ -468,3 +468,441 @@
   .sales-product-entry input{font-size:1.35rem}
   .sales-record-card-grid{grid-template-columns:1fr}
 }
+
+/* =========================================================
+   J&G V7.5 — FINAL MOBILE CLEANUP
+   Paste this at the VERY BOTTOM of owner-location.css
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .owner-page {
+    padding: 0 0 24px;
+    overflow-x: hidden;
+  }
+
+  .owner-shell,
+  .owner-dashboard {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .owner-dashboard-head {
+    padding: 18px 16px 10px;
+    margin-bottom: 12px;
+  }
+
+  .owner-dashboard-head h1 {
+    font-size: clamp(2.1rem, 10vw, 2.9rem);
+    line-height: 1.05;
+  }
+
+  .owner-dashboard-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .owner-top-action {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .owner-quick-nav {
+    position: static;
+    width: calc(100% - 28px);
+    max-width: none;
+    margin: 0 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    border-radius: 18px;
+  }
+
+  .owner-quick-nav a {
+    text-align: center;
+    padding: 10px 12px;
+  }
+
+  .owner-current-box {
+    margin: 0 14px 16px;
+    border-radius: 24px !important;
+  }
+
+  .owner-grid,
+  .owner-review-layout,
+  .sales-tracker-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .owner-card,
+  .owner-card.owner-wide-card,
+  .sales-entry-card,
+  .sales-month-toolbar,
+  .monthly-summary-card,
+  .sales-chart-card,
+  .monthly-records-card,
+  .owner-review-form,
+  .owner-review-item,
+  .owner-location-item,
+  .owner-product-row,
+  .sales-expenses-box {
+    border-radius: 24px !important;
+  }
+
+  .owner-card,
+  .owner-card.owner-wide-card {
+    padding: 22px 16px !important;
+    margin: 0 0 16px !important;
+    box-shadow: none;
+  }
+
+  .owner-section-title {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .owner-section-title h2,
+  .sales-form-title h3,
+  .sales-month-toolbar h3 {
+    line-height: 1.08;
+  }
+
+  .owner-section-copy {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .owner-location-item {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .owner-location-item-top {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .owner-location-actions {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .owner-location-actions .btn,
+  .owner-location-actions .owner-delete-button {
+    min-height: 44px;
+  }
+
+  .owner-location-actions .owner-delete-button {
+    padding: 10px 4px;
+  }
+
+  .owner-form input,
+  .owner-form textarea,
+  .owner-form select,
+  .sales-month-toolbar input {
+    min-height: 52px;
+    font-size: 1rem;
+    border-radius: 16px;
+  }
+
+  .owner-form textarea {
+    min-height: 110px;
+  }
+
+  .owner-two-col,
+  .sales-cost-input-grid,
+  .sales-product-entry-grid,
+  .monthly-summary-grid,
+  .daily-live-summary {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sales-entry-card {
+    padding: 18px 14px !important;
+  }
+
+  .sales-form-title {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .sales-date-label {
+    width: 100%;
+  }
+
+  .sales-audit-tip {
+    padding: 14px;
+    gap: 8px;
+    border-radius: 18px;
+  }
+
+  .sales-audit-tip strong {
+    font-size: .95rem;
+  }
+
+  .sales-audit-tip span {
+    font-size: .86rem;
+    padding: 8px 12px;
+  }
+
+  .sales-product-entry {
+    grid-template-columns: minmax(0, 1fr) 84px !important;
+    align-items: center;
+    gap: 10px !important;
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .sales-product-entry strong {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .sales-product-entry small {
+    font-size: .84rem;
+    line-height: 1.35;
+  }
+
+  .sales-product-entry input {
+    min-height: 52px;
+    font-size: 1.35rem;
+    border-radius: 18px;
+    text-align: center;
+  }
+
+  .peso-input-wrap {
+    min-height: 52px;
+    border-radius: 16px;
+  }
+
+  .sales-expenses-box {
+    padding: 14px;
+  }
+
+  .sales-expenses-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sales-expense-row {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  .sales-expense-remove {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    font-size: 1rem;
+  }
+
+  .daily-live-summary {
+    gap: 10px;
+  }
+
+  .daily-live-summary > div {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .daily-live-summary strong {
+    font-size: 1.45rem;
+  }
+
+  .sales-month-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    padding: 16px 14px !important;
+    min-height: auto !important;
+  }
+
+  .sales-month-toolbar > div,
+  .sales-month-toolbar label {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .monthly-summary-card {
+    padding: 16px 14px;
+  }
+
+  .monthly-summary-card strong {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .sales-chart-card {
+    padding: 16px 14px;
+  }
+
+  .sales-chart-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .sales-chart-legend {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .sales-chart-wrap {
+    min-height: 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .sales-trend-chart {
+    min-width: 560px !important;
+    height: 240px !important;
+  }
+
+  .monthly-records-card {
+    padding: 16px 14px;
+  }
+
+  .sales-records-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .sales-records-head strong {
+    font-size: 1.9rem;
+    line-height: 1.1;
+  }
+
+  .sales-records-head small {
+    font-size: .95rem;
+  }
+
+  /* Hide desktop table on mobile */
+  .sales-records-table-wrap {
+    display: none !important;
+  }
+
+  /* Show mobile cards */
+  .sales-records-mobile-list {
+    display: block !important;
+  }
+
+  .sales-record-card {
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+  }
+
+  .sales-record-card + .sales-record-card {
+    margin-top: 10px;
+  }
+
+  .sales-record-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .sales-record-card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .sales-record-stat {
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fffaf1;
+  }
+
+  .sales-record-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .sales-records-pagination {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+
+  .sales-page-button {
+    flex: 1 1 calc(50% - 5px);
+    min-height: 46px;
+    border-radius: 14px;
+  }
+
+  #salesPageIndicator {
+    width: 100%;
+    text-align: center;
+    order: 3;
+    font-size: .85rem;
+  }
+
+  .owner-review-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .owner-review-form {
+    padding: 16px;
+  }
+
+  .owner-review-item {
+    padding: 16px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 430px) {
+  .owner-dashboard-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .owner-quick-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .owner-card,
+  .owner-card.owner-wide-card {
+    padding: 20px 14px !important;
+    border-radius: 22px !important;
+  }
+
+  .owner-current-box {
+    margin: 0 12px 14px;
+    border-radius: 22px !important;
+  }
+
+  .sales-product-entry {
+    grid-template-columns: minmax(0, 1fr) 76px !important;
+  }
+
+  .sales-product-entry input {
+    font-size: 1.25rem;
+  }
+
+  .monthly-summary-card strong {
+    font-size: 1.8rem;
+  }
+}
