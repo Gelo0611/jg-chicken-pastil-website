@@ -375,3 +375,96 @@
   }
 }
 
+
+
+/* =========================================================
+   J&G V7.4 — MOBILE POLISH FOR SALES DASHBOARD
+   ========================================================= */
+.sales-records-mobile-list{display:none}
+.sales-record-card{padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.sales-record-card + .sales-record-card{margin-top:10px}
+.sales-record-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.sales-record-card-head strong{font-size:1rem;line-height:1.2}
+.sales-record-profit-badge{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;font-size:.72rem;font-weight:900;white-space:nowrap}
+.sales-record-profit-badge.positive{background:#e8f6eb;color:#28733d}
+.sales-record-profit-badge.negative{background:#fae8e8;color:#a31520}
+.sales-record-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.sales-record-stat{padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:#fffaf1}
+.sales-record-stat span,.sales-record-stat strong{display:block}
+.sales-record-stat span{color:var(--muted);font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.sales-record-stat strong{margin-top:4px;font-size:.95rem;line-height:1.15}
+.sales-record-card-actions{display:flex;gap:10px;flex-wrap:wrap}
+.sales-records-pagination{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid var(--line);margin-top:14px}
+.sales-page-button{appearance:none;-webkit-appearance:none;border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:12px;font-weight:800;color:var(--ink);cursor:pointer}
+.sales-page-button:disabled{opacity:.45;cursor:not-allowed}
+#salesPageIndicator{color:var(--muted);font-size:.82rem;font-weight:700;text-align:center}
+
+@media (max-width: 700px){
+  .owner-page{padding:0;background:linear-gradient(145deg,#5d070d 0%,#8b0d14 50%,#460609 100%)}
+  .owner-shell{width:100%}
+  .owner-card{padding:22px 16px;border-radius:28px 28px 0 0;box-shadow:none}
+  .owner-card.owner-wide-card{margin-top:0;border-radius:28px 28px 0 0}
+  .owner-dashboard-head{margin-bottom:16px;padding:18px 16px 0}
+  .owner-dashboard-head h1{font-size:clamp(2rem,11vw,2.8rem)}
+  .owner-dashboard-head p{font-size:.95rem;line-height:1.5}
+  .owner-quick-nav{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;margin:0 0 14px;padding:8px;border-radius:18px}
+  .owner-quick-nav a{padding:10px 12px;font-size:.78rem;text-align:center}
+
+  .owner-sales-section{padding-top:18px}
+  .owner-section-title.owner-sales-heading{gap:12px;margin-bottom:18px}
+  .owner-section-title.owner-sales-heading h2{font-size:clamp(2rem,10vw,2.8rem)}
+  .owner-section-copy{font-size:1rem;line-height:1.55}
+  .sales-tracker-grid{gap:16px}
+  .sales-entry-card,.sales-chart-card,.monthly-records-card,.sales-month-toolbar,.monthly-summary-card{border-radius:18px}
+  .sales-entry-card{padding:18px 14px}
+  .sales-form-title h3,.sales-month-toolbar h3{font-size:clamp(1.9rem,9vw,2.4rem)}
+  .sales-audit-tip{padding:12px;gap:8px}
+  .sales-audit-tip strong{font-size:.95rem}
+  .sales-audit-tip span{font-size:.86rem;padding:8px 12px}
+  .sales-product-entry-grid{grid-template-columns:1fr;gap:10px}
+  .sales-product-entry{grid-template-columns:minmax(0,1fr) 84px;gap:10px;padding:14px}
+  .sales-product-entry strong{font-size:1rem}
+  .sales-product-entry small{font-size:.84rem;line-height:1.35}
+  .sales-product-entry input{min-height:52px;font-size:1.5rem;border-radius:18px}
+  .sales-cost-input-grid{grid-template-columns:1fr}
+  .sales-expenses-box{padding:14px}
+  .sales-expenses-head{align-items:flex-start}
+  .sales-expenses-head .owner-link-button{font-size:1rem}
+  .sales-expense-row{grid-template-columns:1fr;gap:8px}
+  .sales-expense-remove{width:100%;height:42px;border-radius:12px;font-size:1rem}
+  .peso-input-wrap{min-height:52px;border-radius:16px}
+  .owner-form .peso-input-wrap input,
+  .owner-form input,
+  .owner-form textarea,
+  .sales-month-toolbar input{min-height:52px;font-size:1rem}
+  .owner-form textarea{min-height:110px}
+  .daily-live-summary{grid-template-columns:1fr;gap:10px}
+  .daily-live-summary > div{padding:14px}
+  .daily-live-summary strong{font-size:1.55rem}
+  .sales-month-toolbar{padding:18px 14px}
+  .monthly-summary-grid{grid-template-columns:1fr;gap:12px}
+  .monthly-summary-card{padding:16px 14px}
+  .monthly-summary-card strong{font-size:2rem}
+  .sales-chart-card{padding:16px 14px}
+  .sales-chart-head{gap:8px;margin-bottom:12px}
+  .sales-chart-head strong{font-size:1.2rem}
+  .sales-chart-wrap{min-height:0;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .sales-trend-chart{min-width:520px;height:240px}
+  .monthly-records-card{padding:16px 14px}
+  .sales-records-head strong{font-size:1.9rem;line-height:1.1}
+  .sales-records-head small{font-size:1rem}
+  .sales-records-table-wrap{display:none}
+  .sales-records-mobile-list{display:block}
+  .sales-records-pagination{flex-wrap:wrap}
+  .sales-page-button{flex:1 1 calc(50% - 5px);min-height:46px}
+  #salesPageIndicator{width:100%;order:3;padding-top:2px}
+}
+
+@media (max-width: 430px){
+  .owner-card{padding:20px 14px;border-radius:26px 26px 0 0}
+  .owner-dashboard-head{padding:16px 14px 0}
+  .owner-quick-nav{grid-template-columns:1fr 1fr}
+  .sales-product-entry{grid-template-columns:minmax(0,1fr) 78px}
+  .sales-product-entry input{font-size:1.35rem}
+  .sales-record-card-grid{grid-template-columns:1fr}
+}

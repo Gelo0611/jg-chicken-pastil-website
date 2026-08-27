@@ -62,6 +62,7 @@
   const salesChartEmpty = $("#salesChartEmpty");
   const salesChartMonthLabel = $("#salesChartMonthLabel");
   const salesRecordsBody = $("#salesRecordsBody");
+  const salesRecordsMobileList = $("#salesRecordsMobileList");
   const salesRecordsEmpty = $("#salesRecordsEmpty");
   const salesRecordCount = $("#salesRecordCount");
   const salesRecordsPagination = $("#salesRecordsPagination");
@@ -561,6 +562,7 @@
     if (currentSalesPage < 1) currentSalesPage = 1;
 
     salesRecordsBody.innerHTML = "";
+    if (salesRecordsMobileList) salesRecordsMobileList.innerHTML = "";
     salesRecordCount.textContent = `${totalRecords} record${totalRecords === 1 ? "" : "s"}`;
 
     if (!totalRecords) {
@@ -617,6 +619,63 @@
       actions.append(edit, del);
       tr.append(...cells, actions);
       salesRecordsBody.append(tr);
+
+      if (salesRecordsMobileList) {
+        const card = document.createElement("article");
+        card.className = "sales-record-card";
+
+        const head = document.createElement("div");
+        head.className = "sales-record-card-head";
+
+        const date = document.createElement("strong");
+        date.textContent = record.sale_date;
+
+        const profitBadge = document.createElement("span");
+        const positive = Number(record.net_profit) >= 0;
+        profitBadge.className = `sales-record-profit-badge ${positive ? "positive" : "negative"}`;
+        profitBadge.textContent = positive ? "Profit" : "Loss";
+
+        head.append(date, profitBadge);
+
+        const stats = document.createElement("div");
+        stats.className = "sales-record-card-grid";
+
+        const createStat = (label, value, extraClass = "") => {
+          const box = document.createElement("div");
+          box.className = `sales-record-stat ${extraClass}`.trim();
+          const span = document.createElement("span");
+          span.textContent = label;
+          const strong = document.createElement("strong");
+          strong.textContent = value;
+          if (extraClass === "negative-profit") strong.classList.add("negative-profit");
+          if (extraClass === "positive-profit") strong.classList.add("positive-profit");
+          box.append(span, strong);
+          return box;
+        };
+
+        stats.append(
+          createStat("Sales", money(record.product_sales)),
+          createStat("Total Cost", money(record.total_cost)),
+          createStat(
+            "Net Profit",
+            money(record.net_profit),
+            Number(record.net_profit) < 0 ? "negative-profit" : "positive-profit"
+          )
+        );
+
+        const mobileActions = document.createElement("div");
+        mobileActions.className = "sales-record-card-actions";
+
+        const mobileEdit = edit.cloneNode(true);
+        mobileEdit.addEventListener("click", () => editRecord(record));
+
+        const mobileDelete = del.cloneNode(true);
+        mobileDelete.addEventListener("click", () => deleteRecord(record));
+
+        mobileActions.append(mobileEdit, mobileDelete);
+        card.append(head, stats, mobileActions);
+        salesRecordsMobileList.append(card);
+      }
     });
 
     salesRecordsPagination.hidden = totalPages <= 1;
