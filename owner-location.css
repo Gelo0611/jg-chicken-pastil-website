@@ -209,3 +209,92 @@
   .sales-product-entry{grid-template-columns:minmax(0,1fr) 70px}
 }
 
+/* =========================================================
+   J&G V7.2 — SALES DASHBOARD WIDTH / CLIPPING FIX
+   ========================================================= */
+
+/* Give the owner dashboard more usable desktop width. */
+.owner-shell {
+  width: min(1320px, 100%);
+}
+
+/* Prevent CSS Grid children from forcing the right column outside its card. */
+.owner-sales-section {
+  overflow: visible;
+}
+
+.sales-tracker-grid,
+.sales-entry-card,
+.sales-analytics-panel,
+.sales-month-toolbar,
+.sales-chart-card,
+.monthly-records-card,
+.monthly-summary-grid {
+  min-width: 0;
+}
+
+.sales-tracker-grid {
+  grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+}
+
+/* Keep the month selector fully inside the analytics header. */
+.sales-month-toolbar {
+  flex-wrap: wrap;
+}
+
+.sales-month-toolbar > div {
+  min-width: 0;
+  flex: 1 1 260px;
+}
+
+.sales-month-toolbar label {
+  flex: 0 1 220px;
+  width: min(220px, 100%);
+  min-width: 170px;
+  max-width: 220px;
+}
+
+.sales-month-toolbar input {
+  min-width: 0;
+}
+
+/* Chart/table own their horizontal overflow instead of clipping the whole card. */
+.sales-chart-wrap,
+.sales-records-table-wrap {
+  max-width: 100%;
+}
+
+.sales-chart-card,
+.monthly-records-card {
+  overflow: hidden;
+}
+
+.sales-chart-wrap,
+.sales-records-table-wrap {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* Slightly earlier single-column switch so laptops/tablets never feel cramped. */
+@media (max-width: 1180px) {
+  .sales-tracker-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .owner-shell {
+    width: min(100%, 1040px);
+  }
+}
+
+@media (max-width: 700px) {
+  .owner-shell {
+    width: 100%;
+  }
+
+  .sales-month-toolbar label {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+}
+
