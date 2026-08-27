@@ -2736,4 +2736,5 @@ footer {
   }
   .feedback-cta-actions .btn { width: 100%; }
 }
-
+/* J&G V5 — DYNAMIC BIKECART LOCATION */
+.current-location-banner{display:flex;align-items:center;gap:14px;margin:24px 0 18px;padding:16px 18px;border:1px solid rgba(239,217,130,.28);border-radius:18px;background:linear-gradient(135deg,rgba(224,185,74,.17),rgba(255,255,255,.06))}.current-location-pin{width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border-radius:14px;background:var(--gold-400);color:#3b2400;font-size:1.2rem;box-shadow:0 10px 24px rgba(0,0,0,.12)}.current-location-banner span,.current-location-banner small{display:block}.current-location-banner span{color:var(--gold-300);font-size:.68rem;font-weight:900;letter-spacing:.12em}.current-location-banner strong{display:block;margin-top:2px;color:#fff;font-family:"Playfair Display",serif;font-size:1.25rem}.current-location-banner small{margin-top:2px;color:rgba(255,255,255,.62);font-size:.78rem}@media(max-width:640px){.current-location-banner{align-items:flex-start}}

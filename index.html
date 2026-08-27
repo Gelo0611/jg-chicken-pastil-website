@@ -58,7 +58,9 @@
 
   <div class="announcement">
     <p>
-      🔥 Freshly served Chicken Pastil • Visit us in Marulas, Valenzuela City
+      🔥 Freshly served Chicken Pastil
+      <span class="announcement-dot">•</span>
+      <span id="announcementLocation">Today's BikeCart Location: Pio Val, Marulas</span>
       <span class="announcement-dot">•</span>
       <span id="announcementStatus">Message us for today's availability</span>
     </p>
@@ -505,7 +507,16 @@
         <div class="contact-copy reveal">
           <div class="eyebrow">VISIT / MESSAGE US</div>
           <h2>Craving Chicken Pastil?</h2>
-          <p>Visit J&G Chicken Pastil in Marulas, Valenzuela City or message our Facebook page for availability and inquiries.</p>
+          <p>Check our current BikeCart location below before visiting, or message our Facebook page for availability and inquiries.</p>
+
+          <div class="current-location-banner" id="currentLocationBanner">
+            <div class="current-location-pin" aria-hidden="true">📍</div>
+            <div>
+              <span>CURRENT BIKECART LOCATION</span>
+              <strong id="currentLocationName">Pio Val, Marulas</strong>
+              <small id="currentLocationAddress">Pio Val, Marulas, Valenzuela City</small>
+            </div>
+          </div>
 
           <div class="status-card" id="statusCard">
             <div class="status-card-top">
@@ -523,7 +534,7 @@
           <div class="contact-list">
             <div class="contact-row">
               <div class="contact-icon">📍</div>
-              <div><span>Location</span><strong>Pio Val, Marulas, Valenzuela City</strong></div>
+              <div><span>Location</span><strong id="contactLocationText">Pio Val, Marulas, Valenzuela City</strong></div>
             </div>
 
             <div class="contact-row">
@@ -549,11 +560,12 @@
             <img src="assets/logo.png" alt="J&G Chicken Pastil logo" loading="lazy" decoding="async" />
           </div>
 
-          <h3>Pio Val, Marulas</h3>
-          <p>Valenzuela City, Metro Manila</p>
+          <h3 id="locationCardTitle">Pio Val, Marulas</h3>
+          <p id="locationCardSubtitle">Valenzuela City, Metro Manila</p>
 
           <div class="map-embed">
             <iframe
+              id="locationMapFrame"
               src="https://www.google.com/maps?q=14.675873,120.9842109&z=17&output=embed"
               width="100%"
               height="100%"
@@ -720,6 +732,8 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="location-config.js"></script>
+  <script src="location.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
