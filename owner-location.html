@@ -35,7 +35,7 @@
       </header>
 
       <nav class="owner-quick-nav" aria-label="Owner dashboard sections">
-        <a href="#ownerLocationSection">Location</a><a href="#ownerAvailabilitySection">Availability</a><a href="#ownerAnnouncementSection">Announcement</a><a href="#ownerReviewsSection">Reviews</a>
+        <a href="#ownerLocationSection">Location</a><a href="#ownerSalesSection">Sales</a><a href="#ownerAvailabilitySection">Availability</a><a href="#ownerAnnouncementSection">Announcement</a><a href="#ownerReviewsSection">Reviews</a>
       </nav>
 
       <section id="ownerLocationSection">
@@ -59,6 +59,113 @@
             </form>
             <p class="owner-status" id="adminStatus" role="status"></p>
           </section>
+        </div>
+      </section>
+
+
+      <section class="owner-card owner-wide-card owner-sales-section" id="ownerSalesSection">
+        <div class="owner-section-title owner-sales-heading">
+          <div>
+            <span class="owner-kicker">DAILY BUSINESS AUDIT</span>
+            <h2>Sales Tracker</h2>
+            <p class="owner-section-copy">Record sales by actual product/component, not by combo meal. Example: Value Meal = Pastil 1 + Drinks 1.</p>
+          </div>
+          <button class="btn owner-outline-btn owner-small-btn" id="newSalesRecordButton" type="button">+ New Daily Record</button>
+        </div>
+
+        <div class="sales-tracker-grid">
+          <form class="owner-form sales-entry-card" id="dailySalesForm">
+            <input id="dailySalesId" type="hidden">
+
+            <div class="sales-form-title">
+              <div>
+                <span class="owner-kicker">DAILY ENTRY</span>
+                <h3 id="dailySalesFormTitle">Record today's sales</h3>
+              </div>
+              <label class="sales-date-label">Date<input id="salesDate" type="date" required></label>
+            </div>
+
+            <div class="sales-audit-tip">
+              <strong>Combo audit guide</strong>
+              <span>Value = Pastil + Drinks</span>
+              <span>Busog = Pastil + Egg</span>
+              <span>Premium = Pastil + Egg + Drinks</span>
+              <span>Extra Busog = Pastil + Rice</span>
+            </div>
+
+            <div class="sales-product-entry-grid">
+              <label class="sales-product-entry"><span><strong>Pastil</strong><small>Sell ₱35 • Cost ₱15</small></span><input id="salesQtyPastil" type="number" min="0" step="1" value="0" inputmode="numeric"></label>
+              <label class="sales-product-entry"><span><strong>Jar</strong><small>Sell ₱195 • Cost ₱100</small></span><input id="salesQtyJar" type="number" min="0" step="1" value="0" inputmode="numeric"></label>
+              <label class="sales-product-entry"><span><strong>Drinks</strong><small>Sell ₱10 • Cost ₱3</small></span><input id="salesQtyDrinks" type="number" min="0" step="1" value="0" inputmode="numeric"></label>
+              <label class="sales-product-entry"><span><strong>Rice</strong><small>Sell ₱15 • Cost ₱3</small></span><input id="salesQtyRice" type="number" min="0" step="1" value="0" inputmode="numeric"></label>
+              <label class="sales-product-entry"><span><strong>Egg</strong><small>Sell ₱15 • Cost ₱8</small></span><input id="salesQtyEgg" type="number" min="0" step="1" value="0" inputmode="numeric"></label>
+              <label class="sales-product-entry"><span><strong>Tusok-Tusok</strong><small>Sell ₱20 • Cost ₱10</small></span><input id="salesQtyTusok" type="number" min="0" step="1" value="0" inputmode="numeric"></label>
+            </div>
+
+            <div class="sales-cost-input-grid">
+              <label>Staff salary for this day<div class="peso-input-wrap"><span>₱</span><input id="salesSalary" type="number" min="0" step="0.01" value="0" inputmode="decimal"></div></label>
+              <label>Notes <span class="owner-optional">(optional)</span><input id="salesNotes" type="text" maxlength="250" placeholder="Example: rainy day, promo, event, etc."></label>
+            </div>
+
+            <div class="sales-expenses-box">
+              <div class="sales-expenses-head">
+                <div><strong>Other Expenses</strong><small>Packaging, transport, gas, supplies, etc.</small></div>
+                <button class="owner-link-button" id="addExpenseButton" type="button">+ Add expense</button>
+              </div>
+              <div class="sales-expense-rows" id="salesExpenseRows"></div>
+            </div>
+
+            <div class="daily-live-summary">
+              <div><span>Total Sales</span><strong id="liveTotalSales">₱0</strong></div>
+              <div><span>Product Cost</span><strong id="liveProductCost">₱0</strong></div>
+              <div><span>Expenses</span><strong id="liveOtherExpenses">₱0</strong></div>
+              <div><span>Salary</span><strong id="liveSalary">₱0</strong></div>
+              <div><span>Total Cost</span><strong id="liveTotalCost">₱0</strong></div>
+              <div class="profit"><span>Net Profit</span><strong id="liveNetProfit">₱0</strong></div>
+            </div>
+
+            <div class="owner-form-actions">
+              <button class="btn btn-gold" id="saveDailySalesButton" type="submit">Save Daily Sales</button>
+              <button class="btn owner-outline-btn" id="cancelDailySalesEditButton" type="button">Cancel</button>
+            </div>
+            <p class="owner-status" id="dailySalesStatus" role="status"></p>
+          </form>
+
+          <div class="sales-analytics-panel">
+            <div class="sales-month-toolbar">
+              <div><span class="owner-kicker">MONTHLY ANALYTICS</span><h3>Sales Performance</h3></div>
+              <label>Filter by month<input id="salesMonthFilter" type="month"></label>
+            </div>
+
+            <div class="monthly-summary-grid">
+              <div class="monthly-summary-card"><span>Monthly Sales</span><strong id="monthTotalSales">₱0</strong><small id="monthSalesChange">No previous-month data</small></div>
+              <div class="monthly-summary-card"><span>Product Cost</span><strong id="monthProductCost">₱0</strong><small>Cost of products sold</small></div>
+              <div class="monthly-summary-card"><span>Expenses + Salary</span><strong id="monthOperatingCosts">₱0</strong><small id="monthExpenseBreakdown">₱0 expenses • ₱0 salary</small></div>
+              <div class="monthly-summary-card profit"><span>Monthly Net Profit</span><strong id="monthNetProfit">₱0</strong><small id="monthProfitChange">No previous-month data</small></div>
+            </div>
+
+            <div class="sales-chart-card">
+              <div class="sales-chart-head">
+                <div><strong>Daily Sales vs Net Profit</strong><small id="salesChartMonthLabel">Selected month</small></div>
+                <div class="sales-chart-legend"><span><i class="sales-legend-dot sales-dot-sales"></i> Sales</span><span><i class="sales-legend-dot sales-dot-profit"></i> Net Profit</span></div>
+              </div>
+              <div class="sales-chart-wrap">
+                <svg id="salesTrendChart" class="sales-trend-chart" viewBox="0 0 760 330" role="img" aria-label="Daily sales and net profit chart" preserveAspectRatio="none"></svg>
+              </div>
+              <div class="sales-chart-empty" id="salesChartEmpty" hidden>No sales records for this month yet.</div>
+            </div>
+
+            <div class="monthly-records-card">
+              <div class="sales-records-head"><div><strong>Daily Records</strong><small id="salesRecordCount">0 records</small></div></div>
+              <div class="sales-records-table-wrap">
+                <table class="sales-records-table">
+                  <thead><tr><th>Date</th><th>Sales</th><th>Total Cost</th><th>Net Profit</th><th></th></tr></thead>
+                  <tbody id="salesRecordsBody"></tbody>
+                </table>
+              </div>
+              <div class="owner-empty" id="salesRecordsEmpty" hidden>No daily records saved for the selected month.</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -97,5 +204,6 @@
   </main>
   <script src="location-config.js"></script>
   <script src="owner-location.js"></script>
+  <script src="owner-sales.js"></script>
 </body>
 </html>

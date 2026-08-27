@@ -107,3 +107,105 @@
    J&G V6 — OWNER WEBSITE CONTROL CENTER
    ========================================================= */
 .owner-dashboard{padding-bottom:24px}.owner-quick-nav{position:sticky;top:12px;z-index:20;display:flex;flex-wrap:wrap;gap:8px;width:fit-content;max-width:100%;margin:0 0 20px auto;padding:7px;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(43,4,7,.76);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.owner-quick-nav a{padding:8px 12px;border-radius:10px;color:rgba(255,255,255,.82);font-size:.75rem;font-weight:800}.owner-quick-nav a:hover{background:rgba(255,255,255,.1);color:#fff}.owner-wide-card{margin-top:20px}.owner-section-copy{max-width:720px;margin:7px 0 0;color:var(--muted);font-size:.84rem}.owner-product-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.owner-product-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 16px;border:1px solid var(--line);border-radius:16px;background:#fffdf9;transition:opacity .2s ease,background .2s ease,border-color .2s ease}.owner-product-row.unavailable{background:#f6efec;border-color:rgba(151,13,23,.14)}.owner-product-copy{min-width:0}.owner-product-copy strong,.owner-product-copy span{display:block}.owner-product-copy strong{color:var(--ink);line-height:1.25}.owner-product-copy span{margin-top:3px;color:#28733d;font-size:.74rem;font-weight:800}.owner-product-row.unavailable .owner-product-copy span{color:#a31520}.owner-switch{position:relative;width:50px;height:28px;flex:0 0 50px;cursor:pointer}.owner-switch input{position:absolute;opacity:0;pointer-events:none}.owner-switch-slider{position:absolute;inset:0;border-radius:999px;background:#d8cec7;transition:background .2s ease}.owner-switch-slider::after{content:"";position:absolute;top:4px;left:4px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 3px 9px rgba(0,0,0,.16);transition:transform .2s ease}.owner-switch input:checked+.owner-switch-slider{background:#3f9e5d}.owner-switch input:checked+.owner-switch-slider::after{transform:translateX(22px)}.owner-switch input:focus-visible+.owner-switch-slider{outline:3px solid rgba(224,185,74,.45);outline-offset:3px}.owner-announcement-form{max-width:780px}.owner-announcement-preview{display:grid;gap:4px;padding:14px 16px;border-radius:14px;background:linear-gradient(90deg,var(--gold-500),#f1cf68,var(--gold-500));color:#4b2900}.owner-announcement-preview span{font-size:.62rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.owner-announcement-preview strong{font-size:.86rem}.owner-fit-btn{width:fit-content}.owner-form select{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;color:var(--ink);outline:none}.owner-form select:focus{border-color:rgba(212,167,44,.65);box-shadow:0 0 0 4px rgba(224,185,74,.16)}.owner-review-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:start;margin-top:18px}.owner-review-form{margin-top:0;padding:18px;border:1px solid var(--line);border-radius:18px;background:#fffaf1}.owner-checkbox-row{display:flex!important;align-items:center;gap:10px!important;cursor:pointer}.owner-checkbox-row input{width:18px;height:18px;accent-color:var(--red-700)}.owner-review-list{display:grid;gap:10px}.owner-review-item{padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}.owner-review-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.owner-review-top strong{display:block}.owner-review-stars{display:block;margin-top:2px;color:#c99000;letter-spacing:.05em;font-size:.76rem}.owner-review-state{flex:0 0 auto;padding:4px 7px;border-radius:999px;background:#eee7e1;color:var(--muted);font-size:.58rem;font-weight:900;letter-spacing:.07em}.owner-review-state.published{background:#e6f5e9;color:#28733d}.owner-review-item p{margin:10px 0 0;color:var(--muted);font-size:.84rem}.owner-review-actions{display:flex;gap:12px;margin-top:12px}.owner-link-button{padding:0;border:0;background:transparent;color:var(--red-700);font-weight:800;font-size:.76rem;cursor:pointer}.owner-link-button.danger{color:#a31520}@media(max-width:860px){.owner-product-list{grid-template-columns:1fr}.owner-review-layout{grid-template-columns:1fr}.owner-quick-nav{position:static;width:100%;margin-left:0}}@media(max-width:620px){.owner-wide-card{margin-top:14px}.owner-product-row{padding:14px}.owner-fit-btn{width:100%}.owner-quick-nav{display:grid;grid-template-columns:repeat(2,1fr)}.owner-quick-nav a{text-align:center}}
+
+/* =========================================================
+   J&G V7 — DAILY SALES TRACKER & MONTHLY ANALYTICS
+   ========================================================= */
+.owner-sales-section{overflow:hidden}
+.owner-sales-heading{align-items:flex-start}
+.sales-tracker-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:22px;align-items:start}
+.sales-entry-card{margin-top:0;padding:20px;border:1px solid var(--line);border-radius:20px;background:#fffaf1}
+.sales-form-title{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.sales-form-title h3,.sales-month-toolbar h3{margin:4px 0 0;font-family:"Playfair Display",serif;font-size:1.55rem;line-height:1.1}
+.sales-date-label{width:min(190px,100%)}
+.sales-audit-tip{display:flex;flex-wrap:wrap;gap:7px;padding:13px;border-radius:14px;background:#fff3d5;color:#573600}
+.sales-audit-tip strong{width:100%;font-size:.76rem}
+.sales-audit-tip span{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.68);font-size:.68rem;font-weight:700}
+.sales-product-entry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.sales-product-entry{display:grid!important;grid-template-columns:minmax(0,1fr) 76px;align-items:center;gap:12px!important;padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.sales-product-entry strong,.sales-product-entry small{display:block}
+.sales-product-entry strong{line-height:1.2}
+.sales-product-entry small{margin-top:3px;color:var(--muted);font-size:.68rem;font-weight:600}
+.sales-product-entry input{text-align:center;font-weight:900}
+.sales-cost-input-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:10px}
+.peso-input-wrap{display:grid;grid-template-columns:auto 1fr;align-items:center;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#fff}
+.peso-input-wrap>span{padding-left:14px;color:var(--red-700);font-weight:900}
+.owner-form .peso-input-wrap input{border:0;border-radius:0;box-shadow:none}
+.owner-optional{color:var(--muted);font-weight:500}
+.sales-expenses-box{padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.sales-expenses-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px}
+.sales-expenses-head strong,.sales-expenses-head small{display:block}
+.sales-expenses-head small{color:var(--muted);font-size:.68rem}
+.sales-expense-rows{display:grid;gap:8px}
+.sales-expense-row{display:grid;grid-template-columns:1fr 150px 34px;gap:8px;align-items:center}
+.sales-expense-remove{width:34px;height:34px;display:grid;place-items:center;border:0;border-radius:10px;background:#f8e9e6;color:#a31520;font-size:1.1rem;cursor:pointer}
+.daily-live-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.daily-live-summary>div{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.daily-live-summary span,.daily-live-summary strong{display:block}
+.daily-live-summary span{color:var(--muted);font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.daily-live-summary strong{margin-top:2px;color:var(--ink);font-family:"Playfair Display",serif;font-size:1.14rem}
+.daily-live-summary .profit{border-color:rgba(40,115,61,.2);background:#f1faf3}
+.daily-live-summary .profit strong{color:#28733d}
+.daily-live-summary .profit strong.negative,.monthly-summary-card.profit strong.negative{color:#a31520}
+.sales-analytics-panel{display:grid;gap:14px}
+.sales-month-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.sales-month-toolbar label{display:grid;gap:6px;min-width:180px;font-size:.76rem;font-weight:800}
+.sales-month-toolbar input{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;color:var(--ink)}
+.monthly-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.monthly-summary-card{padding:15px 16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.monthly-summary-card span,.monthly-summary-card strong,.monthly-summary-card small{display:block}
+.monthly-summary-card span{color:var(--muted);font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.monthly-summary-card strong{margin-top:4px;color:var(--ink);font-family:"Playfair Display",serif;font-size:1.55rem}
+.monthly-summary-card small{min-height:18px;margin-top:3px;color:var(--muted);font-size:.68rem}
+.monthly-summary-card.profit{border-color:rgba(40,115,61,.18);background:#f4fbf5}
+.monthly-summary-card.profit strong{color:#28733d}
+.change-up{color:#28733d!important;font-weight:800}
+.change-down{color:#a31520!important;font-weight:800}
+.sales-chart-card,.monthly-records-card{padding:16px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.sales-chart-head,.sales-records-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px}
+.sales-chart-head strong,.sales-chart-head small,.sales-records-head strong,.sales-records-head small{display:block}
+.sales-chart-head small,.sales-records-head small{color:var(--muted);font-size:.7rem}
+.sales-chart-legend{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:12px;color:var(--muted);font-size:.7rem;font-weight:700}
+.sales-chart-legend span{display:inline-flex;align-items:center;gap:5px}
+.sales-legend-dot{width:9px;height:9px;border-radius:50%}
+.sales-dot-sales{background:var(--red-700)}
+.sales-dot-profit{background:var(--gold-500)}
+.sales-chart-wrap{width:100%;min-height:280px;overflow-x:auto;overflow-y:hidden}
+.sales-trend-chart{width:100%;min-width:640px;height:300px;overflow:visible}
+.sales-chart-grid-line{stroke:rgba(69,34,26,.1);stroke-width:1}
+.sales-chart-zero-line{stroke:rgba(163,21,32,.28);stroke-width:1.5;stroke-dasharray:5 4}
+.sales-chart-y-label,.sales-chart-x-label{fill:#7c7068;font-family:"DM Sans",sans-serif;font-size:10px}
+.sales-chart-line{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.sales-line{stroke:#970d17}
+.profit-line{stroke:#d4a72c}
+.sales-chart-point{stroke:#fff;stroke-width:2}
+.sales-point{fill:#970d17}
+.profit-point{fill:#d4a72c}
+.sales-chart-empty{padding:38px 18px;text-align:center;color:var(--muted);font-size:.82rem}
+.sales-records-table-wrap{width:100%;overflow-x:auto}
+.sales-records-table{width:100%;min-width:610px;border-collapse:collapse;font-size:.76rem}
+.sales-records-table th,.sales-records-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.sales-records-table th:first-child,.sales-records-table td:first-child{text-align:left}
+.sales-records-table th{color:var(--muted);font-size:.64rem;text-transform:uppercase;letter-spacing:.06em}
+.sales-records-table td{color:var(--ink)}
+.positive-profit{color:#28733d!important;font-weight:900}
+.negative-profit{color:#a31520!important;font-weight:900}
+.sales-record-actions{display:flex;justify-content:flex-end;gap:9px}
+@media(max-width:1000px){.sales-tracker-grid{grid-template-columns:1fr}}
+@media(max-width:700px){
+  .sales-form-title,.sales-month-toolbar{flex-direction:column;align-items:stretch}
+  .sales-date-label,.sales-month-toolbar label{width:100%;min-width:0}
+  .sales-product-entry-grid,.sales-cost-input-grid,.monthly-summary-grid{grid-template-columns:1fr}
+  .daily-live-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sales-expense-row{grid-template-columns:1fr 110px 34px}
+  .sales-chart-head{flex-direction:column}
+  .sales-chart-legend{justify-content:flex-start}
+}
+@media(max-width:430px){
+  .daily-live-summary{grid-template-columns:1fr}
+  .sales-expense-row{grid-template-columns:1fr 34px}
+  .sales-expense-row .peso-input-wrap{grid-column:1/2}
+  .sales-expense-remove{grid-column:2;grid-row:1/span 2;height:100%}
+  .sales-product-entry{grid-template-columns:minmax(0,1fr) 70px}
+}
+
