@@ -64,10 +64,18 @@
   const salesRecordsBody = $("#salesRecordsBody");
   const salesRecordsEmpty = $("#salesRecordsEmpty");
   const salesRecordCount = $("#salesRecordCount");
+  const salesRecordsPagination = $("#salesRecordsPagination");
+  const salesPrevPage = $("#salesPrevPage");
+  const salesNextPage = $("#salesNextPage");
+  const salesPageIndicator = $("#salesPageIndicator");
 
   let records = [];
   let expenseCounter = 0;
   let initialized = false;
+
+  const SALES_RECORDS_PER_PAGE = 10;
+  let currentSalesPage = 1;
+  let currentMonthRecords = [];
 
   const base = () => cfg.supabaseUrl.replace(/\/+$/, "");
   const token = () => sessionStorage.getItem("jg-owner-access-token") || "";
@@ -544,17 +552,34 @@
   }
 
   function renderTable(list) {
-    salesRecordsBody.innerHTML = "";
-    salesRecordCount.textContent = `${list.length} record${list.length === 1 ? "" : "s"}`;
+    currentMonthRecords = [...list];
 
-    if (!list.length) {
+    const totalRecords = currentMonthRecords.length;
+    const totalPages = Math.max(1, Math.ceil(totalRecords / SALES_RECORDS_PER_PAGE));
+
+    if (currentSalesPage > totalPages) currentSalesPage = totalPages;
+    if (currentSalesPage < 1) currentSalesPage = 1;
+
+    salesRecordsBody.innerHTML = "";
+    salesRecordCount.textContent = `${totalRecords} record${totalRecords === 1 ? "" : "s"}`;
+
+    if (!totalRecords) {
       salesRecordsEmpty.hidden = false;
+      salesRecordsPagination.hidden = true;
+      salesPageIndicator.textContent = "Page 1 of 1";
       return;
     }
 
     salesRecordsEmpty.hidden = true;
 
-    [...list].reverse().forEach((record) => {
+    const newestFirst = [...currentMonthRecords].reverse();
+    const startIndex = (currentSalesPage - 1) * SALES_RECORDS_PER_PAGE;
+    const pageRecords = newestFirst.slice(
+      startIndex,
+      startIndex + SALES_RECORDS_PER_PAGE
+    );
+
+    pageRecords.forEach((record) => {
       const tr = document.createElement("tr");
 
       const cells = [
@@ -565,7 +590,12 @@
       ].map((text, index) => {
         const td = document.createElement("td");
         td.textContent = text;
-        if (index === 3) td.className = Number(record.net_profit) < 0 ? "negative-profit" : "positive-profit";
+        if (index === 3) {
+          td.className =
+            Number(record.net_profit) < 0
+              ? "negative-profit"
+              : "positive-profit";
+        }
         return td;
       });
 
@@ -588,6 +618,26 @@
       tr.append(...cells, actions);
       salesRecordsBody.append(tr);
     });
+
+    salesRecordsPagination.hidden = totalPages <= 1;
+    salesPageIndicator.textContent = `Page ${currentSalesPage} of ${totalPages}`;
+    salesPrevPage.disabled = currentSalesPage <= 1;
+    salesNextPage.disabled = currentSalesPage >= totalPages;
+  }
+
+  function goToSalesPage(page) {
+    const totalPages = Math.max(
+      1,
+      Math.ceil(currentMonthRecords.length / SALES_RECORDS_PER_PAGE)
+    );
+
+    currentSalesPage = Math.min(totalPages, Math.max(1, page));
+    renderTable(currentMonthRecords);
+
+    const recordsCard = salesRecordsBody.closest(".monthly-records-card");
+    if (recordsCard) {
+      recordsCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
   }
 
   function renderAnalytics() {
@@ -630,7 +680,18 @@
     resetForm();
     form.scrollIntoView({ behavior: "smooth", block: "start" });
   });
-  salesMonthFilter.addEventListener("change", renderAnalytics);
+  salesMonthFilter.addEventListener("change", () => {
+    currentSalesPage = 1;
+    renderAnalytics();
+  });
+
+  salesPrevPage.addEventListener("click", () => {
+    goToSalesPage(currentSalesPage - 1);
+  });
+
+  salesNextPage.addEventListener("click", () => {
+    goToSalesPage(currentSalesPage + 1);
+  });
 
   // Owner login is handled by owner-location.js.
   // Watch for the authenticated dashboard becoming visible.

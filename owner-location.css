@@ -298,3 +298,80 @@
   }
 }
 
+/* =========================================================
+   J&G V7.3 — DAILY RECORDS PAGINATION
+   ========================================================= */
+
+.sales-records-table-wrap {
+  max-height: 470px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.sales-records-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #fff;
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.sales-records-pagination {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.sales-records-pagination[hidden] {
+  display: none;
+}
+
+.sales-records-pagination > span {
+  text-align: center;
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 800;
+}
+
+.sales-page-button {
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid rgba(118,11,18,.16);
+  border-radius: 11px;
+  background: #fff8ea;
+  color: var(--red-800);
+  font-size: .72rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease, opacity .18s ease;
+}
+
+.sales-page-button:hover:not(:disabled) {
+  background: #fff0c8;
+  transform: translateY(-1px);
+}
+
+.sales-page-button:disabled {
+  opacity: .38;
+  cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+  .sales-records-pagination {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sales-records-pagination > span {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .sales-page-button {
+    width: 100%;
+  }
+}
+
