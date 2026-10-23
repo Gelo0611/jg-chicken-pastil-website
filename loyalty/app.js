@@ -48,7 +48,7 @@ const demoDefault=()=>({members:seed.map(x=>({...x,expiresAt:expiry(),vouchers:x
 let demo;
 try{demo=JSON.parse(localStorage.getItem('jg_suki_demo_v2')||'null')||demoDefault()}catch{demo=demoDefault()}
 function saveDemo(){try{localStorage.setItem('jg_suki_demo_v2',JSON.stringify(demo))}catch{ /* opaque preview origin: in-memory demo still works */ }}
-let state={role:'customer',user:null,authTab:'login',demoCustomer:demo.members[0].memberCode,card:null,cachedAt:null,member:null,order:'regular',branch:'Tamaraw',busy:false,owner:null,ownerSearch:'',pending:[],demoOffline:false,staffAccess:null,staffAccessError:'',accessAccount:null,accessSearch:'',accessSearchMessage:'',staffBusy:false,syncBusy:false};
+let state={role:'customer',user:null,authTab:'login',demoCustomer:demo.members[0].memberCode,card:null,cachedAt:null,member:null,order:'regular',branch:'Tamaraw',busy:false,owner:null,ownerSearch:'',ownerPage:1,ownerAlertsPage:1,ownerClaimsPage:1,pending:[],demoOffline:false,staffAccess:null,staffAccessError:'',accessAccount:null,accessSearch:'',accessSearchMessage:'',staffBusy:false,syncBusy:false};
 const online=()=>navigator.onLine&&!state.demoOffline;
 let lastAcceptedPurchase=null;
 async function withPurchaseLock(work){
@@ -144,9 +144,96 @@ async function confirmStaffChange(id,enabled){
  finally{state.staffBusy=false;render();}
 }
 
-function renderAdmin(){const data=ownerData();if(!data){app.innerHTML=pageHead('OWNER OVERVIEW','J&G Loyalty Dashboard','Loading your verified member and reward records…');return;}const members=data.members||[],search=state.ownerSearch.toLowerCase();let shown=members.filter(x=>x.name.toLowerCase().includes(search)||x.memberCode.toLowerCase().includes(search));
-app.innerHTML=pageHead('OWNER OVERVIEW','Suki Rewards Dashboard','Monitor loyal customers, reward claims, and employee-confirmed activity.',`<button class="button outline small" data-action="refresh-owner">${icon('refresh')} Refresh</button>`)+(!online()?`<div class="offline-banner">${icon('alert')} Showing last loaded admin data. New claims will appear after you reconnect.</div>`:'')+
-`<div class="admin-metrics"><div class="metric"><div class="eyebrow">TOTAL CUSTOMERS</div><strong class="mono">${data.membersTotal||0}</strong><small>Registered members</small></div><div class="metric"><div class="eyebrow">STAMPS ISSUED</div><strong class="mono">${data.stampsTotal||0}</strong><small>Server-verified stamps</small></div><div class="metric"><div class="eyebrow">REWARDS CLAIMED</div><strong class="mono">${data.claimsTotal||0}</strong><small>${data.gulamanClaims||0} Gulaman · ${data.busogClaims||0} Busog</small></div><div class="metric"><div class="eyebrow">READY TO CLAIM</div><strong class="mono">${data.availableRewards||0}</strong><small>Available vouchers</small></div></div><div class="admin-content"><div class="panel"><div class="panel-heading"><h2>Customer loyalty monitoring</h2><span class="pill gray">${members.length} shown</span></div><div class="search-row"><input id="owner-search" class="text-input" aria-label="Search customers" placeholder="Search name or Member ID" value="${txt(state.ownerSearch)}" /></div><div class="table-overflow"><table class="customer-table"><thead><tr><th>Customer</th><th>Member ID</th><th>Card</th><th>Stamps</th><th>Rewards</th></tr></thead><tbody>${shown.map(x=>`<tr><td data-label="Customer"><b>${txt(x.name)}</b></td><td data-label="Member ID">${txt(x.memberCode)}</td><td data-label="Card">#${x.cycle}</td><td data-label="Stamps"><span class="pill red">${icon('star')} ${x.stamps}/8</span></td><td data-label="Rewards">${x.availableRewards?`<span class="pill gold">${x.availableRewards} ready</span>`:'—'}</td></tr>`).join('')||'<tr><td colspan="5">No matching members.</td></tr>'}</tbody></table></div><p class="hint">${DEMO?'Sample member records.':'Showing up to 150 recent accounts. Pagination and CSV export will follow.'}</p></div><div class="stack"><div class="panel"><div class="panel-heading"><h2>${icon('gift')} Reward claim alerts</h2><span class="pill ${data.notifications?.some(n=>!n.readAt)?'red':'gray'}">${(data.notifications||[]).filter(n=>!n.readAt).length} new</span></div>${data.notifications?.length?`<div>${data.notifications.slice(0,9).map(n=>`<div class="claim-item"><div class="claim-emoji">${icon('check')}</div><div style="flex:1;min-width:0"><strong>${txt(n.message)}</strong><small>${time(n.createdAt)}</small></div>${!n.readAt?`<button class="button outline small" data-action="read-notice" data-value="${txt(n.id)}">Seen</button>`:''}</div>`).join('')}</div>`:'<div class="empty">No reward claims yet.</div>'}</div><div class="panel"><div class="panel-heading"><h2>Claim breakdown</h2><span class="pill gold">ALL TIME</span></div><div class="cards-quick"><div class="quick"><div class="quick-icon">${icon('cup')}</div><b>${data.gulamanClaims||0}</b><small>Free Gulaman claimed</small></div><div class="quick"><div class="quick-icon">${icon('bowl')}</div><b>${data.busogClaims||0}</b><small>Free Busog Meal claimed</small></div></div><div class="divider"></div><div class="mini-label">RECENT CLAIMS</div>${data.claims?.length?data.claims.slice(0,5).map(c=>`<div class="history-row"><div class="history-left"><div class="history-icon">${icon('gift')}</div><div><strong>${txt(c.name)} · ${REWARDS[c.kind]?.label||''}</strong><small>${time(c.claimedAt)} · ${txt(c.employee||'J&G Staff')}</small></div></div></div>`).join(''):'<div class="empty" style="margin-top:12px">Claims will show here after approval.</div>'}</div></div></div>`;app.insertAdjacentHTML('beforeend',ownerEmployeeAccessHtml());}
+// P1H-A3: Bounded owner lists. Server's newest-first ordering is retained.
+const OWNER_PAGE_SIZE=5;
+function ownerPaginate(items,key){
+ const total=items.length;
+ const pages=Math.max(1,Math.ceil(total/OWNER_PAGE_SIZE));
+ const requested=Number(state[key]);
+ const page=Number.isInteger(requested)?Math.min(Math.max(requested,1),pages):1;
+ state[key]=page;
+ const offset=(page-1)*OWNER_PAGE_SIZE;
+ return {rows:items.slice(offset,offset+OWNER_PAGE_SIZE),page,pages,total,
+  from:total?offset+1:0,to:Math.min(total,offset+OWNER_PAGE_SIZE)};
+}
+function ownerPager(label,action,part){
+ return `<nav class="owner-pager" aria-label="${txt(label)} pagination">
+  <span class="owner-pager-info" role="status">Showing ${part.from}–${part.to} of ${part.total} · Page ${part.page} of ${part.pages}</span>
+  <div class="owner-pager-buttons">
+   <button type="button" class="owner-pager-btn" data-action="${action}" data-value="${part.page-1}" ${part.page===1?'disabled':''} aria-label="Previous ${txt(label)} page">Previous</button>
+   <button type="button" class="owner-pager-btn" data-action="${action}" data-value="${part.page+1}" ${part.page===part.pages?'disabled':''} aria-label="Next ${txt(label)} page">Next</button>
+  </div>
+ </nav>`;
+}
+function renderAdmin(){
+ const data=ownerData();
+ if(!data){app.innerHTML=pageHead('OWNER OVERVIEW','J&G Loyalty Dashboard','Loading your verified member and reward records…');return;}
+ const members=data.members||[];
+ const search=state.ownerSearch.trim().toLowerCase();
+ const matched=members.filter(x=>String(x.name||'').toLowerCase().includes(search)||String(x.memberCode||'').toLowerCase().includes(search));
+ const customers=ownerPaginate(matched,'ownerPage');
+ const allAlerts=data.notifications||[];
+ const alerts=ownerPaginate(allAlerts,'ownerAlertsPage');
+ const allClaims=data.claims||[];
+ const claims=ownerPaginate(allClaims,'ownerClaimsPage');
+ const unread=allAlerts.filter(n=>!n.readAt).length;
+
+ app.innerHTML=pageHead('OWNER OVERVIEW','Suki Rewards Dashboard','Monitor loyal customers, reward claims, and employee-confirmed activity.',`<button class="button outline small" data-action="refresh-owner">${icon('refresh')} Refresh</button>`)+
+ (!online()?`<div class="offline-banner">${icon('alert')} Showing last loaded admin data. New claims will appear after you reconnect.</div>`:'')+
+ `<div class="admin-metrics">
+  <div class="metric"><div class="eyebrow">TOTAL CUSTOMERS</div><strong class="mono">${data.membersTotal||0}</strong><small>Registered members</small></div>
+  <div class="metric"><div class="eyebrow">STAMPS ISSUED</div><strong class="mono">${data.stampsTotal||0}</strong><small>Server-verified stamps</small></div>
+  <div class="metric"><div class="eyebrow">REWARDS CLAIMED</div><strong class="mono">${data.claimsTotal||0}</strong><small>${data.gulamanClaims||0} Gulaman · ${data.busogClaims||0} Busog</small></div>
+  <div class="metric"><div class="eyebrow">READY TO CLAIM</div><strong class="mono">${data.availableRewards||0}</strong><small>Available vouchers</small></div>
+ </div>
+ <div class="admin-content">
+  <section class="panel">
+   <div class="panel-heading"><h2>Customer loyalty monitoring</h2><span class="pill gray">${matched.length} matching</span></div>
+   <div class="search-row"><input id="owner-search" class="text-input" aria-label="Search customers" placeholder="Search name or Member ID" value="${txt(state.ownerSearch)}" /></div>
+   <div class="table-overflow"><table class="customer-table">
+    <thead><tr><th>Customer</th><th>Member ID</th><th>Card</th><th>Stamps</th><th>Rewards</th></tr></thead>
+    <tbody>${customers.rows.map(x=>`<tr>
+      <td data-label="Customer"><b>${txt(x.name)}</b></td>
+      <td data-label="Member ID">${txt(x.memberCode)}</td>
+      <td data-label="Card">#${x.cycle}</td>
+      <td data-label="Stamps"><span class="pill red">${icon('star')} ${x.stamps}/8</span></td>
+      <td data-label="Rewards">${x.availableRewards?`<span class="pill gold">${x.availableRewards} ready</span>`:'—'}</td>
+     </tr>`).join('')||'<tr><td colspan="5">No matching members.</td></tr>'}</tbody>
+   </table></div>
+   ${ownerPager('customers','owner-customers-page',customers)}
+   <p class="hint">${DEMO?'Sample member records.':'Showing the latest loaded accounts (up to 150). Page controls cover these loaded records.'}</p>
+  </section>
+  <div class="stack">
+   <section class="panel">
+    <div class="panel-heading"><h2>${icon('gift')} Reward claim alerts</h2><span class="pill ${unread?'red':'gray'}">${unread} new</span></div>
+    ${allAlerts.length?`<div class="owner-list-scroll" tabindex="0" aria-label="Reward claim alerts">
+     ${alerts.rows.map(n=>`<div class="claim-item">
+      <div class="claim-emoji">${icon('check')}</div>
+      <div style="flex:1;min-width:0"><strong>${txt(n.message)}</strong><small>${time(n.createdAt)}</small></div>
+      ${!n.readAt?`<button class="button outline small" data-action="read-notice" data-value="${txt(n.id)}">Seen</button>`:''}
+     </div>`).join('')}
+    </div>`:'<div class="empty">No reward claims yet.</div>'}
+    ${ownerPager('reward alerts','owner-alerts-page',alerts)}
+   </section>
+   <section class="panel">
+    <div class="panel-heading"><h2>Claim breakdown</h2><span class="pill gold">ALL TIME</span></div>
+    <div class="cards-quick">
+     <div class="quick"><div class="quick-icon">${icon('cup')}</div><b>${data.gulamanClaims||0}</b><small>Free Gulaman claimed</small></div>
+     <div class="quick"><div class="quick-icon">${icon('bowl')}</div><b>${data.busogClaims||0}</b><small>Free Busog Meal claimed</small></div>
+    </div>
+    <div class="divider"></div><div class="mini-label">RECENT CLAIMS</div>
+    ${allClaims.length?`<div class="owner-list-scroll" tabindex="0" aria-label="Recent reward claims">
+     ${claims.rows.map(c=>`<div class="history-row"><div class="history-left">
+      <div class="history-icon">${icon('gift')}</div><div><strong>${txt(c.name)} · ${REWARDS[c.kind]?.label||''}</strong><small>${time(c.claimedAt)} · ${txt(c.employee||'J&G Staff')}</small></div>
+     </div></div>`).join('')}
+    </div>`:'<div class="empty" style="margin-top:12px">Claims will show here after approval.</div>'}
+    ${ownerPager('recent claims','owner-claims-page',claims)}
+   </section>
+  </div>
+ </div>`;
+ app.insertAdjacentHTML('beforeend',ownerEmployeeAccessHtml());
+}
+
 function renderAuth(){
  const isSignup=state.authTab==='signup';
  const isRecover=state.authTab==='recover';
@@ -456,9 +543,9 @@ async function startScanner(){
  }
 }
 app.addEventListener('submit',async e=>{if(e.target.id==='owner-employee-search-form'){e.preventDefault();const email=String(new FormData(e.target).get('employeeEmail')||'').trim().toLowerCase();if(email)await ownerFindEmployee(email);}else if(e.target.id==='lookup-form'){e.preventDefault();const val=String(new FormData(e.target).get('memberId')||'').trim();try{await reloadMember(val)}catch(err){toast(err.message)}}else if(e.target.id==='award-form'){e.preventDefault();state.order=e.target.querySelector('#order-select').value;state.branch=e.target.querySelector('#branch-select').value;await issue()}else if(e.target.id==='auth-form'){e.preventDefault();await handleAuth(e.target)}});
-document.addEventListener('input',e=>{if(e.target.id==='owner-search'){state.ownerSearch=e.target.value;const pos=e.target.selectionStart;renderAdmin();const input=$('#owner-search');input.focus();input.setSelectionRange(pos,pos)}if(e.target.id==='simulate-offline'){state.demoOffline=e.target.checked;render()}});
+document.addEventListener('input',e=>{if(e.target.id==='owner-search'){state.ownerSearch=e.target.value;state.ownerPage=1;const pos=e.target.selectionStart;renderAdmin();const input=$('#owner-search');input.focus();input.setSelectionRange(pos,pos)}if(e.target.id==='simulate-offline'){state.demoOffline=e.target.checked;render()}});
 document.addEventListener('change',e=>{if(e.target.id==='demo-customer'){state.demoCustomer=e.target.value;render()}if(e.target.id==='order-select'){state.order=e.target.value;renderEmployee()}if(e.target.id==='branch-select'){state.branch=e.target.value}if(e.target.id==='simulate-offline'){state.demoOffline=e.target.checked;render()}});
-document.addEventListener('click',async e=>{const btn=e.target.closest('[data-action]');if(!btn)return;const action=btn.dataset.action,v=btn.dataset.value;if(action==='toggle-password'){const field=document.getElementById(v);if(field){const willShow=field.type==='password';field.type=willShow?'text':'password';btn.innerHTML=icon(willShow?'eyeOff':'eye');btn.setAttribute('aria-pressed',String(willShow));const label=`${willShow?'Hide':'Show'} ${v==='auth-confirm-password'?'confirm password':'password'}`;btn.setAttribute('aria-label',label);btn.title=label;}}else if(action==='open-qr'){const customer=DEMO?demoCard():state.card;if(customer)openQrPreview(customer);}else if(action==='role'&&DEMO){state.role=v;state.member=null;if(v==='admin')await ownerRefresh();else render()}else if(action==='close-modal')dialog.close();else if(action==='auth-tab'){state.authTab=v;render()}else if(action==='employee-change')requestStaffChange(v,btn.dataset.enabled==='true');else if(action==='confirm-employee-change')await confirmStaffChange(v,btn.dataset.enabled==='true');else if(action==='open-scanner')await startScanner();else if(action==='claim')claim(v);else if(action==='confirm-claim')await confirmClaim(v);else if(action==='sync')await sync();else if(action==='refresh-owner')await ownerRefresh();else if(action==='read-notice'){try{if(DEMO){let n=demo.notifications.find(n=>n.id===v);if(n)n.readAt=new Date().toISOString();saveDemo()}else await api.markNotification(v);await ownerRefresh()}catch(err){toast(err.message)}}else if(action==='logout'){if(state.busy||state.syncBusy){toast('Complete the active purchase or sync before logging out.');return;}await api.logout();state.user=null;state.card=null;state.member=null;state.owner=null;render()}});
+document.addEventListener('click',async e=>{const btn=e.target.closest('[data-action]');if(!btn)return;const action=btn.dataset.action,v=btn.dataset.value;if(action==='toggle-password'){const field=document.getElementById(v);if(field){const willShow=field.type==='password';field.type=willShow?'text':'password';btn.innerHTML=icon(willShow?'eyeOff':'eye');btn.setAttribute('aria-pressed',String(willShow));const label=`${willShow?'Hide':'Show'} ${v==='auth-confirm-password'?'confirm password':'password'}`;btn.setAttribute('aria-label',label);btn.title=label;}}else if(action==='owner-customers-page'||action==='owner-alerts-page'||action==='owner-claims-page'){const key=action==='owner-customers-page'?'ownerPage':action==='owner-alerts-page'?'ownerAlertsPage':'ownerClaimsPage';const requested=Number(v);if(Number.isInteger(requested)&&requested>=1){state[key]=requested;renderAdmin();}}else if(action==='open-qr'){const customer=DEMO?demoCard():state.card;if(customer)openQrPreview(customer);}else if(action==='role'&&DEMO){state.role=v;state.member=null;if(v==='admin')await ownerRefresh();else render()}else if(action==='close-modal')dialog.close();else if(action==='auth-tab'){state.authTab=v;render()}else if(action==='employee-change')requestStaffChange(v,btn.dataset.enabled==='true');else if(action==='confirm-employee-change')await confirmStaffChange(v,btn.dataset.enabled==='true');else if(action==='open-scanner')await startScanner();else if(action==='claim')claim(v);else if(action==='confirm-claim')await confirmClaim(v);else if(action==='sync')await sync();else if(action==='refresh-owner')await ownerRefresh();else if(action==='read-notice'){try{if(DEMO){let n=demo.notifications.find(n=>n.id===v);if(n)n.readAt=new Date().toISOString();saveDemo()}else await api.markNotification(v);await ownerRefresh()}catch(err){toast(err.message)}}else if(action==='logout'){if(state.busy||state.syncBusy){toast('Complete the active purchase or sync before logging out.');return;}await api.logout();state.user=null;state.card=null;state.member=null;state.owner=null;render()}});
 $('#close-scanner').addEventListener('click',()=>$('#scanner-dialog').close());
 async function refreshRoleIfChanged(){
  if(DEMO||!state.user||!online())return false;

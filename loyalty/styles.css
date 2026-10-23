@@ -228,3 +228,16 @@ html{scroll-behavior:smooth}body{margin:0;min-height:100vh}button,input,select{f
  .staff-search-result .button,.staff-access-row .button{width:100%}
  .staff-access-list{max-height:none}
 }
+
+/* P1H-A3 — bounded owner lists, five records per page. */
+.owner-pager{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:13px;padding-top:13px;border-top:1px solid var(--line)}
+.owner-pager-info{font-size:12px;color:var(--gray);line-height:1.45;font-variant-numeric:tabular-nums}
+.owner-pager-buttons{display:flex;align-items:center;gap:7px}
+.owner-pager-btn{font:inherit;font-size:12px;font-weight:700;color:var(--red);background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-height:36px;cursor:pointer;white-space:nowrap}
+.owner-pager-btn:hover:not(:disabled){background:#fff5e7;border-color:var(--gold)}
+.owner-pager-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.owner-pager-btn:disabled{opacity:.42;cursor:not-allowed}
+.owner-list-scroll{max-height:305px;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.owner-list-scroll .claim-item strong,.owner-list-scroll .history-row strong{overflow-wrap:anywhere}
+.owner-list-scroll .history-left{min-width:0}
+@media(max-width:560px){.owner-pager{align-items:stretch;gap:10px}.owner-pager-info{width:100%}.owner-pager-buttons{width:100%}.owner-pager-btn{flex:1}.owner-list-scroll{max-height:285px}}

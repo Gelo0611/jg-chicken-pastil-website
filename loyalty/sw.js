@@ -1,4 +1,4 @@
-const VERSION='jg-suki-v1g-a11-qr-module-offline-cache';
+const VERSION='jg-suki-p1h-a3-owner-pagination';
 const ASSETS=['./','./index.html','./styles.css','./app.js','./qr.js','./api.js','./offline.js','./issuance-safety.js','./config.js','./manifest.webmanifest','./assets/jg-logo.png','./assets/icon-180.png','./assets/icon-192.png','./assets/icon-512.png','./vendor/jsqr/jsQR.js','./vendor/qr/index.js','./vendor/qr/QR8bitByte.js','./vendor/qr/QRBitBuffer.js','./vendor/qr/QRErrorCorrectLevel.js','./vendor/qr/QRMaskPattern.js','./vendor/qr/QRMath.js','./vendor/qr/QRMode.js','./vendor/qr/QRPolynomial.js','./vendor/qr/QRRSBlock.js','./vendor/qr/QRUtil.js'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(VERSION).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(names=>Promise.all(names.filter(n=>n.startsWith('jg-suki-')&&n!==VERSION).map(n=>caches.delete(n)))).then(()=>self.clients.claim())));
