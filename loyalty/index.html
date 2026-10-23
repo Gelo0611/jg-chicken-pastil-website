@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#921f31"/>
+<meta name="description" content="J&G Suki Rewards — Your Chicken Pastil loyalty card, stamps, and rewards."/>
+<title>J&G Suki Rewards | Chicken Pastil</title>
+<link rel="icon" type="image/png" href="./assets/icon-192.png"/>
+<link rel="apple-touch-icon" href="./assets/icon-180.png"/>
+<link rel="manifest" href="./manifest.webmanifest"/>
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<a href="#app" class="skip-link">Skip to content</a>
+<div id="shell">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" title="Return to J&G Chicken Pastil website" aria-label="Return to J&G Chicken Pastil website">
+        <div class="brand-logo"><img src="./assets/jg-logo.png" alt="J&G Chicken Pastil logo" width="60" height="60" /></div>
+        <div class="brand-copy"><strong>J&G <span>SUKI REWARDS</span></strong><small>CHICKEN PASTIL • EAT. EARN. ENJOY.</small></div>
+      </a>
+      <div class="header-actions"><div class="connection" id="connection" aria-live="polite"><span class="dot"></span> Online</div><div id="account-actions"></div></div>
+    </div>
+  </header>
+  <div class="mode-notice" id="mode-notice" role="status"></div>
+  <div class="demo-switch" id="demo-switch" hidden aria-label="Demo role views"></div>
+  <main id="app" class="app-container" tabindex="-1"><div class="loading-state">Loading your rewards…</div></main>
+  <footer class="site-footer"><span>© 2026 J&G Chicken Pastil</span><a href="../index.html">← Back to J&G website</a></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<dialog id="app-dialog"><div id="dialog-content"></div></dialog>
+<dialog id="scanner-dialog" class="scanner-dialog"><div class="scanner-head"><h2>Scan customer QR</h2><button class="icon-button" id="close-scanner" aria-label="Close scanner">✕</button></div><video id="scanner-video" autoplay playsinline muted></video><p id="scanner-help" class="hint">Position the QR code inside the frame.</p><div class="scan-line"></div></dialog>
+<script src="./config.js"></script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

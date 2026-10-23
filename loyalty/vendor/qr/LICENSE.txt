@@ -1,0 +1,1 @@
+QRCode for JavaScript, Copyright (c) 2009 Kazuhiko Arase. MIT license. Source: qrcode-terminal vendored QRCode module (npm distribution).
