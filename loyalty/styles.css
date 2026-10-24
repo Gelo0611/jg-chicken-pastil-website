@@ -241,3 +241,76 @@ html{scroll-behavior:smooth}body{margin:0;min-height:100vh}button,input,select{f
 .owner-list-scroll .claim-item strong,.owner-list-scroll .history-row strong{overflow-wrap:anywhere}
 .owner-list-scroll .history-left{min-width:0}
 @media(max-width:560px){.owner-pager{align-items:stretch;gap:10px}.owner-pager-info{width:100%}.owner-pager-buttons{width:100%}.owner-pager-btn{flex:1}.owner-list-scroll{max-height:285px}}
+
+/* P1H-CUSTOMER-HISTORY-EMAIL-20261024-V4: customer purchase pagination only */
+.purchase-pagination{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:14px;padding:4px 0 0;}
+.purchase-pagination .purchase-page-info{color:var(--muted,#615b59);font-size:.82rem;font-weight:700;text-align:center;}
+.purchase-pagination .button{min-width:98px;}
+.purchase-pagination .button:disabled{opacity:.45;cursor:not-allowed;}
+@media(max-width:420px){.purchase-pagination .button{min-width:86px;padding:9px 10px;}.purchase-pagination{gap:6px;}.purchase-pagination .purchase-page-info{font-size:.75rem;}}
+
+/* P1H-A12-ACCOUNT-SETTINGS-20261024: scoped account dialog, no existing loyalty selectors overridden */
+.jg-settings-toggle{margin-right:8px;white-space:nowrap;}
+.jg-account-dialog{width:min(96vw,650px);max-width:650px;max-height:min(92dvh,860px);margin:auto;padding:0;border:0;border-radius:20px;background:#fffdf9;color:#231e20;box-shadow:0 20px 70px #0005;overflow:auto;}
+.jg-account-dialog::backdrop{background:rgba(22,13,17,.65);}
+.jg-as-head{display:flex;align-items:start;justify-content:space-between;gap:12px;padding:24px 26px;background:#861e30;color:white;}
+.jg-as-head h2{margin:5px 0 8px;font-size:clamp(22px,4vw,30px);line-height:1.1;color:white;}
+.jg-as-head p{margin:0;font-size:13px;color:#ffe9e9;}
+.jg-as-kicker{font-size:11px;font-weight:800;letter-spacing:.15em;color:#ffdc81;}
+.jg-as-close{flex:0 0 auto;border:1px solid #ffffff66;background:transparent;color:white;border-radius:10px;width:36px;height:36px;font-size:26px;cursor:pointer;}
+.jg-as-content{padding:20px 26px 26px;display:grid;gap:18px;}
+.jg-as-section{border:1px solid #eaded8;border-radius:14px;padding:20px;min-width:0;background:white;}
+.jg-as-section h3{font-size:18px;margin:0 0 12px;color:#321b24;}
+.jg-as-section label{display:block;font-size:13px;font-weight:700;margin:13px 0 5px;}
+.jg-as-section input{display:block;box-sizing:border-box;width:100%;min-width:0;border:1px solid #cbb8b4;border-radius:9px;padding:11px 12px;font:inherit;background:white;color:#231e20;}
+.jg-as-section input:focus-visible,.jg-as-submit:focus-visible,.jg-as-secondary:focus-visible,.jg-as-close:focus-visible{outline:3px solid #d99e38;outline-offset:2px;}
+.jg-as-submit{width:100%;background:#8c2035;color:white;padding:12px 14px;border:0;border-radius:10px;font-weight:800;font:inherit;cursor:pointer;margin-top:15px;}
+.jg-as-submit:disabled,.jg-as-secondary:disabled{opacity:.55;cursor:wait;}
+.jg-as-secondary{border:1px solid #8c2035;color:#8c2035;background:white;border-radius:9px;padding:10px 12px;font-weight:700;white-space:nowrap;cursor:pointer;}
+.jg-as-code-row{display:flex;gap:8px;align-items:center;}
+.jg-as-help{font-size:12px;line-height:1.6;color:#665d61;margin:12px 0 0;}
+.jg-as-status{font-size:13px;line-height:1.55;margin-top:11px;overflow-wrap:anywhere;}
+.jg-as-status[data-kind="error"]{color:#a01526;}
+.jg-as-status[data-kind="success"]{color:#14603b;}
+@media(max-width:560px){.jg-settings-toggle{margin-right:4px}.jg-account-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 24px);border-radius:14px;}.jg-as-head{padding:20px 16px;}.jg-as-content{padding:14px;gap:14px;}.jg-as-section{padding:15px;}.jg-as-code-row{flex-direction:column;align-items:stretch;}.jg-as-code-row .jg-as-secondary{width:100%;}}
+
+/* P1H-A13-MOBILE-SETTINGS-UI-20261024: hamburger only on mobile; existing desktop header remains intact. */
+.jg-as-desktop-actions{display:flex;align-items:center;gap:8px;}
+.jg-as-mobile-menu{display:none;}
+/* Keep the header stationary while scrolling only the account settings form. */
+.jg-account-dialog[open]{display:flex;flex-direction:column;overflow:hidden;max-height:min(92dvh,860px);}
+.jg-account-dialog .jg-as-panel{display:flex;flex-direction:column;min-height:0;max-height:inherit;overflow:hidden;width:100%;}
+.jg-account-dialog .jg-as-head{flex:0 0 auto;align-items:flex-start;min-height:0;}
+.jg-account-dialog .jg-as-content{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable;overscroll-behavior:contain;padding-right:34px;margin-right:7px;}
+/* SVG avoids font glyph baseline drift: X is centered within a fixed button box. */
+.jg-account-dialog .jg-as-close{width:40px;height:40px;min-width:40px;min-height:40px;display:grid;place-items:center;align-self:flex-start;box-sizing:border-box;padding:0;margin:0;border-radius:10px;line-height:1;}
+.jg-account-dialog .jg-as-close svg{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+@media(max-width:767px){
+  #account-actions .summary-bar>.header-user{display:none;}
+  #account-actions .jg-as-desktop-actions{display:none;}
+  #account-actions .jg-as-mobile-menu{display:block;position:relative;margin-left:auto;}
+  #account-actions .jg-as-mobile-menu>summary{display:grid;place-items:center;width:44px;height:44px;min-width:44px;list-style:none;cursor:pointer;border:1px solid rgba(255,255,255,.42);border-radius:12px;background:rgba(255,255,255,.08);color:#fff;user-select:none;}
+  #account-actions .jg-as-mobile-menu>summary::-webkit-details-marker{display:none;}
+  #account-actions .jg-as-mobile-menu>summary::marker{content:'';}
+  #account-actions .jg-as-mobile-menu>summary svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  #account-actions .jg-as-mobile-menu>summary:focus-visible,#account-actions .jg-as-mobile-action:focus-visible{outline:3px solid #f8ca69;outline-offset:3px;}
+  #account-actions .jg-as-mobile-panel{position:absolute;top:calc(100% + 10px);right:0;z-index:5000;width:min(268px,calc(100vw - 24px));box-sizing:border-box;display:flex;flex-direction:column;gap:9px;padding:13px;background:#fffdf9;color:#2f2226;border:1px solid #e8d9d3;border-radius:14px;box-shadow:0 14px 35px #0004;}
+  #account-actions .jg-as-mobile-menu:not([open])>.jg-as-mobile-panel{display:none;}
+  #account-actions .jg-as-mobile-identity{display:flex;flex-direction:column;gap:3px;padding:3px 4px 10px;border-bottom:1px solid #eee1dc;overflow-wrap:anywhere;}
+  #account-actions .jg-as-mobile-identity strong{font-size:14px;}
+  #account-actions .jg-as-mobile-status{font-size:12px;color:#28734c;}
+  #account-actions .jg-as-mobile-action{display:block;width:100%;box-sizing:border-box;min-height:44px;padding:10px 12px;background:#fffdf9;color:#762034;border:1px solid #e4ccc8;border-radius:10px;font:inherit;font-size:14px;font-weight:700;text-align:left;cursor:pointer;}
+  #account-actions .jg-as-mobile-logout{color:#a12036;}
+  .jg-account-dialog[open]{width:calc(100vw - 18px);max-height:calc(100dvh - 24px);border-radius:16px;}
+  .jg-account-dialog .jg-as-head{padding:19px 16px 17px;gap:9px;}
+  .jg-account-dialog .jg-as-head>div:first-child{min-width:0;}
+  .jg-account-dialog .jg-as-close{width:40px;height:40px;min-width:40px;}
+  .jg-account-dialog .jg-as-content{margin-right:5px;padding:16px 19px 22px 15px;scrollbar-gutter:stable;}
+}
+
+/* P1H-A15-EMAIL-VERIFIED-PASSWORD-20261024: verified-email password flow in Account Settings. */
+.jg-as-verification .jg-as-verify-step{display:flex;gap:12px;align-items:flex-start;border:1px solid #f1e2d8;background:#fffaf5;border-radius:12px;margin:14px 0;padding:14px;}
+.jg-as-verification .jg-as-verify-step .jg-as-help{margin:4px 0 0;}
+.jg-as-verification .jg-as-step-number{width:30px;height:30px;min-width:30px;border-radius:999px;background:#862137;color:#fff;display:grid;place-items:center;font-weight:800;}
+.jg-as-verification #jg-as-password-email{overflow-wrap:anywhere;}
+@media(max-width:560px){.jg-as-verification .jg-as-verify-step{gap:9px;padding:12px;}}

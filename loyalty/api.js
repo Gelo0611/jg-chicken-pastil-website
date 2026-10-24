@@ -46,6 +46,9 @@ export class JGApi {
  }
  async recover(email){return this.request(`/auth/v1/recover?redirect_to=${encodeURIComponent(this.redirectUrl())}`,{method:'POST',auth:false,body:{email}})}
  async updatePassword(password){if(!this.session?.access_token)throw new Error('Open a valid password reset link first.');return this.request('/auth/v1/user',{method:'PUT',body:{password}})}
+ // P1H-A12-ACCOUNT-SETTINGS-20261024: signed-in account settings. Supabase Auth only, no loyalty database modifications.
+ accountIdentity(){if(!this.session?.access_token)throw new Error('Sign in first.');return this.request('/auth/v1/user');}
+ requestAccountEmailChange(email){if(!this.session?.access_token)throw new Error('Sign in first.');return this.request(`/auth/v1/user?redirect_to=${encodeURIComponent(this.redirectUrl())}`,{method:'PUT',body:{email}});}
  rpc(name,payload={}){return this.request(`/rest/v1/rpc/${name}`,{method:'POST',body:payload});}
  async myCard(){const data=await this.rpc('jg_my_card');localStorage.setItem(CARD_CACHE,JSON.stringify({at:new Date().toISOString(),data}));return data;}
  cachedCard(){try{return JSON.parse(localStorage.getItem(CARD_CACHE)||'null')}catch{return null}}
@@ -58,3 +61,5 @@ export class JGApi {
  ownerStaffDirectory(){return this.rpc('jg_owner_staff_directory')}
  setEmployee(userId,enabled){return this.rpc('jg_set_employee',{p_user_id:userId,p_enabled:enabled})}
 }
+
+// P1H-A15-EMAIL-VERIFIED-PASSWORD-20261024: direct signed-in password mutation removed. Use verified recovery link only.
